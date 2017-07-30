@@ -1,0 +1,107 @@
+
+            <div id="div-forms"> 
+              
+          
+              <form id="register-form" name="registerForm"  ng-submit="register();">
+                <div class="modal-body">
+                  <div id="div-register-msg">
+                    <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+                    <span id="text-register-msg">Register an account.</span> </div>
+
+                  <div class="form-group">
+				    <label for="exampleInputEmail1">Email</label>
+				    <input id="register_email" class="form-control topMarginForRegister" type="email" placeholder="E-Mail" ng-model="loginDetails.email"  ng-blur="validateEmail();" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">First Name</label>
+                  <input id="register_firstname" class="form-control topMarginForRegister" type="text" placeholder="First Name" ng-model="loginDetails.firstName" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Last Name</label>
+                  <input id="register_lastname" class="form-control topMarginForRegister" type="text" placeholder="Last Name" ng-model="loginDetails.lastName" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Password</label>
+                  <input id="register_password" class="form-control topMarginForRegister" type="password" placeholder="Password" ng-model="loginDetails.password" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Confirm Password</label>
+                  <input id="register_confirm_password" class="form-control topMarginForRegister" type="password" placeholder="Confirm Password" ng-model="loginDetails.confirmPassword" required>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Role</label>
+				    <label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions1" id="inlineRadio1" ng-model="loginDetails.role" value="User" required> User
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions1" id="inlineRadio2" ng-model="loginDetails.role" value="Consultant" required> Consultant
+					</label>
+				  </div>
+				  <div class="form-group" >
+				    <label for="exampleInputPassword1">Gender</label>
+				    <label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" ng-model="loginDetails.gender" value="Male" required> Male
+					</label>
+					<label class="radio-inline">
+					  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" ng-model="loginDetails.gender" value="Female" required> Female
+					</label>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Mobile Number</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="text" placeholder="Number" ng-model="loginDetails.mobileNumber" required >
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Address</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="text" placeholder="Address" ng-model="loginDetails.address" required >
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">City</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="text" placeholder="City" ng-model="loginDetails.city" required >
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">State</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="text" placeholder="State" ng-model="loginDetails.state" required >
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Zip Code</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="number" min="0" placeholder="Zip code" ng-model="loginDetails.zipcode" required >
+				  </div>
+				  <div class="form-group" ng-if="loginDetails.role==='Consultant'">
+				    <label for="exampleInputEmail1">Category</label>
+                   <select ng-model="loginDetails.category" ng-change="getSubCategories();">
+                   <option>Select Category</option>
+                   <option ng-repeat="category in categories" value="{{category}}">{{category.categoryName}}</option>
+                   </select>
+				  </div>
+				   <div class="form-group" ng-if="loginDetails.role==='Consultant' && loginDetails.category!='Select Category'">
+                  <label for="exampleInputEmail1">Category</label>
+                   <select ng-model="loginDetails.subcategory" multiple>
+                   <option ng-repeat="subcategory in subcategories" value="{{subcategory}}">{{subcategory}}</option>
+                   </select>
+				  </div>
+				  <div class="form-group" ng-if="loginDetails.role==='User'">
+				    <label for="exampleInputEmail1">Age</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="number" min="0" placeholder="age" ng-model="loginDetails.age" required >
+				  </div>
+				  <div class="form-group" ng-if="loginDetails.role==='User'">
+				    <label for="exampleInputPassword1">Height</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="number" min="0" placeholder="height" ng-model="loginDetails.height" required >
+				  </div>
+				  <div class="form-group" ng-if="loginDetails.role==='User'">
+				    <label for="exampleInputPassword1">Weight</label>
+                   <input id="register_country" class="form-control topMarginForRegister" type="number"  min="0" placeholder="weight" ng-model="loginDetails.weight" required >
+				  </div>
+				  
+                </div>
+                <div class="modal-footer">
+                  <div>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="registerForm.$invalid || (loginDetails.role==='Consultant' & (loginDetails.category==='Select Category' || loginDetails.subcategory==='Select SubCategory'))">Register</button>
+                  </div>
+                  <div>
+                    <button id="register_login_btn" type="button" class="btn btn-link" ng-click="changeBodyTemplate('partials/home/loginBody.html');">Log In</button>
+                    <button id="register_lost_btn" type="button" class="btn btn-link" ng-click="changeBodyTemplate('partials/home/forgotPassword.html');">Forgot Your Password ?</button>
+                  </div>
+                </div>
+              </form>
+              
+           </div>

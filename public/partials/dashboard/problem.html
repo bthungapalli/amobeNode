@@ -1,0 +1,40 @@
+<div class="col-xs-12">
+  <h3>Problem</h3>
+  <hr style="margin-top: 0px;margin-bottom: 15px;border-top: 2.5px solid #1abb9c;">
+  <div class="col-xs-12" ng-if="errorMessage"><label class="text-danger">{{errorMessage}}</label></div>
+  <div class="col-xs-12" ng-if="successMessage"><label class="text-success">{{successMessage}}</label></div>
+
+
+  <form  name="problemForm" ng-submit="submitProblem();">
+  
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="categoryName"> Title <sup class="text-danger">*</sup></label>
+        <input type="text" ng-disabled="editProblem" ng-model="problem.title"  name="title" class="form-control" id="title" placeholder="Title" required>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="categoryName">Summary <sup class="text-danger">*</sup></label>
+        <textarea class="form-control" rows="3" ng-model="problem.summary" required></textarea>
+      </div>
+    </div>
+    <div class="col-xs-12">
+      <div class="form-group">
+        <label for="categoryName"> Description <sup class="text-danger">*</sup></label>
+        <textarea class="form-control" ng-model="problem.description" rows="3" required></textarea>
+      </div>
+    </div>
+    <div class="col-xs-12">
+    <label class="checkbox-inline">
+	  <input type="checkbox" id="inlineCheckbox1" ng-model="problem.anonymous" value="true"> Anonymous
+	</label>
+    </div>
+    <div class="col-xs-12 text-center">
+      <button type="submit" ng-hide="problem.status==='SAVE'" ng-disabled="problemForm.$invalid" ng-click="problem.status='DRAFT'" class="btn btn-primary">Draft</button>
+      <button type="submit" ng-disabled="problemForm.$invalid" ng-click="problem.status='SAVE'" class="btn btn-success">Submit</button>
+    </div>
+  </form> 
+
+
+</div>

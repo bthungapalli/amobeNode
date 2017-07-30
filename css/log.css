@@ -1,0 +1,287 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-family: "Exo2";
+}
+@font-face {
+	font-family: "Exo2";
+	src: url(../fonts/Exo2-Regular.otf);
+}
+.wrapper {
+	width: 100%;
+	height: auto;
+	float: left;
+	margin: 0;
+}
+.head {
+	width: 100%;
+	height: auto;
+	margin: 0px;
+	float: left;
+}
+.head-lft {
+	width: 100%;
+	height: auto;
+	margin: 10px 0 0 0;
+	float: left;
+}
+.head-lft p {
+	margin: 0px;
+	text-align: left;
+}
+.head-lft p a {
+	text-decoration: none;
+}
+.head-lft p a img {
+	vertical-align: middle;
+}
+.head-rgt {
+	width: 30%;
+	height: auto;
+	margin: 14px 0 0 0;
+	float: right;
+}
+.head-rgt p {
+	margin: 0px;
+	/*padding: 10px;*/
+	/*background: url(../images/bg.png) repeat-x;*/
+	text-align: center;
+	color: #FFF;
+}
+.head-rgt p a {
+	text-decoration: none;
+	color: #FFF;
+	font-size: 18px;
+}
+.veg {
+	width: 100%;
+	height: 690px;
+	margin: 10px 0 0 0;
+	float: left;
+	background: url(../images/back-bg.png) no-repeat center center;
+	background-size: cover;
+	background-size: 100%;
+}
+.social {
+	width: 100%;
+	height: auto;
+	float: left;
+	margin: 0px 0px 0px;
+}
+.social ul {
+	margin: 15px 0 0 5px;
+	padding: 0;
+}
+.social ul li {
+	color: #fff;
+	display: inline;
+	font-size: 12px;
+	list-style: outside none none;
+	margin: 0px;
+	padding: 0px;
+	border-radius: 2px;
+}
+.social ul li a {
+	text-decoration: none;
+	color: #fff;
+	font-weight: bold;
+}
+.social img {
+	margin: 0 6px 0 0;
+	padding: 0 0 5px;
+	vertical-align: middle;
+}
+#login-modal .modal-dialog {
+	width: 350px;
+}
+#login-modal input[type=text], input[type=password] {
+	margin-top: 10px;
+}
+
+.topMarginForRegister{
+	margin-top: 5px !important;
+}
+
+#div-login-msg, #div-lost-msg, #div-register-msg {
+	border: 1px solid #dadfe1;
+	height: 30px;
+	line-height: 28px;
+	transition: all ease-in-out 500ms;
+	    margin-bottom: 7px
+}
+#div-login-msg.success, #div-lost-msg.success, #div-register-msg.success {
+	border: 1px solid #68c3a3;
+	background-color: #c8f7c5;
+}
+#div-login-msg.error, #div-lost-msg.error, #div-register-msg.error {
+	border: 1px solid #eb575b;
+	background-color: #ffcad1;
+}
+#icon-login-msg, #icon-lost-msg, #icon-register-msg {
+	width: 30px;
+	float: left;
+	line-height: 28px;
+	text-align: center;
+	background-color: #dadfe1;
+	margin-right: 5px;
+	transition: all ease-in-out 500ms;
+}
+#icon-login-msg.success, #icon-lost-msg.success, #icon-register-msg.success {
+	background-color: #68c3a3 !important;
+}
+#icon-login-msg.error, #icon-lost-msg.error, #icon-register-msg.error {
+	background-color: #eb575b !important;
+}
+#img_logo {
+	max-height: 250px;
+	max-width: 250px;
+}
+/* #########################################
+   #    override the bootstrap configs     #
+   ######################################### */
+
+ .modal-backdrop.in {
+	filter: alpha(opacity=50);
+	opacity: .8;
+}
+.modal-content {
+	background-color: #ececec;
+	border: 1px solid #bdc3c7;
+	border-radius: 0px;
+	outline: 0;
+}
+.modal-header {
+	min-height: 16.43px;
+	padding: 15px 15px 15px 15px;
+	border-bottom: 0px;
+}
+.modal-body {
+	position: relative;
+	padding: 5px 15px 5px 15px;
+}
+.modal-footer {
+	padding: 15px 15px 15px 15px;
+	text-align: left;
+	border-top: 0px;
+} 
+.checkbox {
+	margin-bottom: 0px;
+}
+.btn {
+	border-radius: 0px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+	outline: none;
+}
+.btn-lg, .btn-group-lg>.btn {
+	border-radius: 0px;
+}
+.btn-link {
+	padding: 5px 10px 0px 0px;
+	color: #333;
+}
+.btn-link:hover, .btn-link:focus {
+	color: #2c3e50;
+	text-decoration: none;
+}
+.glyphicon {
+	top: 0px;
+}
+
+ @media only screen and (min-width:50px) and (max-width:639px) {
+.head-lft {
+	margin: 10px 0 0;
+	width: 100%;
+}
+.head-rgt {
+	margin: 15px 0 0 0;
+	width: 100%;
+}
+.head-lft p {
+	margin: 0;
+	text-align: center;
+}
+.head-lft p a img {
+	width: 85%;
+	vertical-align: middle;
+}
+.veg {
+	background-size: cover !important;
+}
+.social ul li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 15%;
+}
+.social img {
+	margin: 0 4px 0 0;
+}
+#login-modal .modal-dialog {
+	width: 300px;
+}
+}
+@media only screen and (min-width:640px) and (max-width:1023px) {
+.head-lft {
+	margin: 10px 0 0;
+	width: 48%;
+}
+.head-rgt {
+	margin: 20px 0 0 0;
+	width: 30%;
+}
+.head-lft p {
+	margin: 0;
+	text-align: center;
+}
+.head-lft p a img {
+	width: 80%;
+	vertical-align: middle;
+}
+.veg {
+	background-size: cover !important;
+}
+.social ul li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 15%;
+}
+.social img {
+	margin: 0 4px 0 0;
+}
+#login-modal .modal-dialog {
+	width: 300px;
+	margin: 20px auto;
+}
+}
+@media only screen and (min-width:1024px) and (max-width:1600px) {
+.social ul li {
+	float: left;
+	margin: 0;
+	padding: 0;
+	width: 15%;
+}
+.social img {
+	margin: 0 4px 0 0;
+}
+}
+
+@media only screen and (min-width: 768px){
+ .modal-dialog {
+    margin: 100px auto;
+   
+} 
+ .modal-sm .modal-content {
+    width: 350px !important;
+   
+} 
+} 
+
+.btn-primary{
+	background: url(../images/bg.png);
+	border-radius: 5px !important;
+}

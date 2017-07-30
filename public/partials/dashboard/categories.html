@@ -1,0 +1,83 @@
+<div class="col-xs-12">
+
+<h3>Add Category</h3>
+<hr style="margin-top: 0px;margin-bottom: 15px;border-top: 2.5px solid #1abb9c;">
+
+
+<div class="col-xs-12">
+<form ng-submit="submitCategory();" class="form-horizontal">
+  <div class="form-group">
+    <label for="exampleInputName2">Category Name</label>
+    <input type="text" class="form-control" ng-model="category.categoryName" id="exampleInputName2" required placeholder="Category">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail2">Subcategory Name</label>
+    <input type="text" class="form-control"  ng-model="subcategory.subcategoryName" placeholder="Subcategory">
+     <button type="button" class="btn btn-primary" ng-click="addSubcategory();">Add</button>
+  </div>
+  
+  <table class="table table-hover" style="background-color: white" ng-if="category.subcategories.length>0">
+    <thead>
+      <tr>
+        <th>Subcategories</th>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  ng-repeat="subcategory in category.subcategories">
+        <td>{{subcategory}} </td>
+         <td><button class="btn btn-sm btn-danger" ng-click="removeSubcategory($index);"><span class="glyphicon glyphicon-remove"></span></button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="col-xs-12 text-center">
+  <button type="submit" class="btn btn-success" ng-disabled="category.subcategories.length===0">Submit</button>
+  </div>
+</form>
+
+</div>
+
+</br></br>
+
+<h3>Existing Categories</h3>
+<hr style="margin-top: 0px;margin-bottom: 15px;border-top: 2.5px solid #1abb9c;"> 
+<div class="col-xs-4">
+
+
+			 <div class="form-group">
+    <label for="exampleInputPassword1">Categories Per Page</label>
+    <select class="form-control" ng-model="itemsPerPage">
+					 <option  value="5">5</option>
+			  <option value="10">10</option>
+			  <option value="25">25</option>
+			  <option value="50">50</option>
+					</select>
+  </div>		
+					
+	</div>
+	
+		<div class="col-xs-8">
+			 <div class="form-group">
+    <label for="exampleInputPassword1">Search</label>
+    <input type="text" class="form-control" id="exampleInputPassword1"  ng-model="search" placeholder="Search">
+  </div>
+			</div>
+			
+			
+<table class="table table-hover " style="background-color: white">
+    <thead>
+      <tr>
+        <th>Category Name</th>
+        <th>Subcategory Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  dir-paginate="category in categories |filter:search|itemsPerPage:itemsPerPage">
+        <td>{{category.categoryName}} </td>
+        <td><span ng-repeat="subcategory in category.subcategories"> {{subcategory}},</span> </td>
+      </tr>
+    </tbody>
+  </table>
+
+<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+</div>

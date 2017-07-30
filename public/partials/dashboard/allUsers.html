@@ -1,0 +1,50 @@
+<div class="col-xs-12">
+
+<h3>All Users</h3>
+<hr style="margin-top: 0px;margin-bottom: 15px;border-top: 2.5px solid #1abb9c;">
+<div class="col-xs-4">
+
+
+			 <div class="form-group">
+    <label for="exampleInputPassword1">Users Per Page</label>
+    <select class="form-control" ng-model="itemsPerPage">
+					 <option  value="5">5</option>
+			  <option value="10">10</option>
+			  <option value="25">25</option>
+			  <option value="50">50</option>
+					</select>
+  </div>		
+					
+	</div>
+	
+		<div class="col-xs-8">
+			 <div class="form-group">
+    <label for="exampleInputPassword1">Search</label>
+    <input type="text" class="form-control" id="exampleInputPassword1"  ng-model="search" placeholder="Search">
+  </div>
+			</div>
+			
+			
+<table class="table table-hover " style="background-color: white">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  dir-paginate="user in users |filter:search|itemsPerPage:itemsPerPage">
+        <td>{{user.firstName}} {{user.lastName}}</td>
+        <td>{{user.role}}</td>
+        <td>
+            <button type="button" ng-click="activateOrInactivateUser(user,true)" ng-if="!user.isActive" class="btn btn-xs btn-success">Activate</button>
+             <button type="button" ng-click="activateOrInactivateUser(user,false)" ng-if="user.isActive" class="btn btn-xs btn-danger">Deactivate</button>
+
+       </td>
+      </tr>
+    </tbody>
+  </table>
+
+<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+</div>
