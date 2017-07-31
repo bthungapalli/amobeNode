@@ -128,11 +128,12 @@
 		 };
 		 
 		 $scope.getSubCategories=function(){
-			 if($scope.loginDetails.subcategory=="Select SubCategory"){
+			 if($scope.loginDetails.category!=="Select Category"){
 				 $scope.subcategories=[];
 				 $scope.subcategories=JSON.parse($scope.loginDetails.category).subcategories;
+			 }else{
+				 $scope.subcategories=[];
 			 }
-			 
 		 };
 		 
 		 $scope.validateEmail=function(){

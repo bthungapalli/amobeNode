@@ -28,9 +28,22 @@
 			return defered.promise;
 		};
 		
+		function getAllCategories(){
+			var registerResource=$resource("/categories/allCategories");
+			var defered=$q.defer();
+			registerResource.query(
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
 		return {
 			getCategories:getCategories,
-			submitCategory:submitCategory
+			submitCategory:submitCategory,
+			getAllCategories:getAllCategories
 		};
 	};
 	

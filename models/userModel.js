@@ -27,7 +27,7 @@ var UserSchema = new Schema({
     age:{type:Number,required:false},
     height:{type:Number,required:false},
     weight:{type:Number,required:false},
-    category:categorySchema,
+    category:{type:categorySchema,required:false},
     experience:{type:Number,required:false},
     isActive:{type:Boolean,required:false},
     last_login: {type: Date,required:false},

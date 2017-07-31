@@ -80,6 +80,8 @@ return{
 					"description": problem.description,
 					"summary": problem.summary,
 					"created_by":user.email,
+					"category":problem.category,
+					"subcategory":problem.subcategory,
 					"username":user.firstName+" "+user.lastName,
 					"anonymous":problem.anonymous});
 				 	 serviceObj.save(problemCreated,callbackForCreateOrUpdateProblem);

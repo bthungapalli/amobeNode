@@ -6,6 +6,8 @@
 		$scope.successMessage="";
 		$scope.categories=[];
 		$scope.itemsPerPage="5";
+		$scope.editCategoryFlag=false;
+		$scope.editCategoryIndex=0;
 		$scope.category={
 				"categoryName":"",
 				subcategories:[]
@@ -45,17 +47,28 @@
         $scope.removeSubcategory=function(index){
         		$scope.category.subcategories.splice(index,1);
         }
-	     
+	    
+        $scope.editCategory=function(category,index){
+        	$scope.editCategoryFlag=true;
+        	$scope.editCategoryIndex=index;
+        	$scope.category=category;
+        }
+        
 		$scope.submitCategory=function(){
 			$scope.errorMessage="";
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.submitCategory($scope.category).then(function (response) {
-				$scope.categories.push(response);
+				if($scope.editCategoryFlag){
+					$scope.categories[$scope.editCategoryIndex]=response;
+					$scope.editCategoryIndex=0;
+					$scope.editCategoryFlag=false;
+				}else{
+					$scope.categories.push(response);
+				}
 				$scope.category={
 						"categoryName":"",
 						subcategories:[]
-						
 				}
 				dashboardSpinnerService.stopSpinner();
             })

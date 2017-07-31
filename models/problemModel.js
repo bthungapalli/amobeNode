@@ -17,6 +17,8 @@ var ProblemSchema = new Schema({
     description:{type: String, required: true},
     summary:{type: String, required: true},
     status:{type: String, required: true},
+    category:{type: String, required: true},
+    subcategory:{type: String, required: true},
     anonymous  :{type:Boolean,required: true,default: false},
     username:{type: String, required: true},
     accepted:{type: Boolean, required: false,default: false},

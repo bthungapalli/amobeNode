@@ -215,7 +215,7 @@
 				loginFactory.submitLogin($scope.loginDetails)
 				.then(function (userDetails) {
 					if(userDetails._id==undefined){
-						$scope.loginMessageDetails.errorMessage.login="Invalid Credentials";
+						$scope.loginMessageDetails.errorMessage.login="Invalid Username or Password";
 					}else{
 						$scope.ok(userDetails);
 					}
@@ -266,11 +266,12 @@
 		 };
 		 
 		 $scope.getSubCategories=function(){
-			 if($scope.loginDetails.subcategory=="Select SubCategory"){
+			 if($scope.loginDetails.category!=="Select Category"){
 				 $scope.subcategories=[];
 				 $scope.subcategories=JSON.parse($scope.loginDetails.category).subcategories;
+			 }else{
+				 $scope.subcategories=[];
 			 }
-			 
 		 };
 		 
 		 $scope.validateEmail=function(){
@@ -410,7 +411,7 @@
 			var payload =  {"email":loginDetails.email,"password":loginDetails.password,"city":loginDetails.city,"state":loginDetails.state,
 							"country":loginDetails.country,"zipcode":loginDetails.zipcode,"firstName":loginDetails.firstName,"lastName":loginDetails.lastName,
 							"gender":loginDetails.gender,"mobileNumber":loginDetails.mobileNumber,"address":loginDetails.address,"role":loginDetails.role
-							,"zipcode":loginDetails.zipcode,"age":loginDetails.age,"height":loginDetails.height,"weight":loginDetails.weight}
+							,"zipcode":loginDetails.zipcode,"age":loginDetails.age,"height":loginDetails.height,"weight":loginDetails.weight,"category":loginDetails.category}
 			registerResource.save(payload,
 		    function(response){
 				defered.resolve(response);
@@ -553,6 +554,8 @@
 		$scope.successMessage="";
 		$scope.categories=[];
 		$scope.itemsPerPage="5";
+		$scope.editCategoryFlag=false;
+		$scope.editCategoryIndex=0;
 		$scope.category={
 				"categoryName":"",
 				subcategories:[]
@@ -592,17 +595,28 @@
         $scope.removeSubcategory=function(index){
         		$scope.category.subcategories.splice(index,1);
         }
-	     
+	    
+        $scope.editCategory=function(category,index){
+        	$scope.editCategoryFlag=true;
+        	$scope.editCategoryIndex=index;
+        	$scope.category=category;
+        }
+        
 		$scope.submitCategory=function(){
 			$scope.errorMessage="";
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.submitCategory($scope.category).then(function (response) {
-				$scope.categories.push(response);
+				if($scope.editCategoryFlag){
+					$scope.categories[$scope.editCategoryIndex]=response;
+					$scope.editCategoryIndex=0;
+					$scope.editCategoryFlag=false;
+				}else{
+					$scope.categories.push(response);
+				}
 				$scope.category={
 						"categoryName":"",
 						subcategories:[]
-						
 				}
 				dashboardSpinnerService.stopSpinner();
             })
@@ -661,18 +675,23 @@
 
 (function(){
 	
-	function problemController($scope,problemsFactory,dashboardUserDetailsService,$rootScope,dashboardSpinnerService,$state,$stateParams){
+	function problemController($scope,problemsFactory,dashboardUserDetailsService,$rootScope,dashboardSpinnerService,$state,$stateParams,categoryFactory){
 		$scope.problemId=$stateParams.problemId;
 		$scope.errorMessage="";
 		$scope.successMessage="";
 		$scope.editProblem=false;
+		$scope.category="Select Category";
+		$scope.categories=[];
 		$scope.init=function(){
 			$scope.problem={
 					"title":"",
 					"summary":"",
 					"description":"",
 					"status":"",
-					"anonymous":false
+					"anonymous":false,
+					"category":"",
+					"subcategory":"Select Subcategory"
+					
 			};
 		}
 		
@@ -696,7 +715,36 @@
 			$scope.editProblem=true;
 			$scope.getProblem();
 		}
+		
+		$scope.getAllCategories=function(){
+			$scope.errorMessage="";
+			$scope.successMessage="";
+			dashboardSpinnerService.startSpinner();
+			categoryFactory.getAllCategories().then(function (response) {
+				$scope.categories=response;
+				dashboardSpinnerService.stopSpinner();
+            })
+            .catch(function(error){
+        		$scope.errorMessage="Some thing went wrong";
+            	dashboardSpinnerService.stopSpinner();
+            });
+		};
 	     
+		$scope.getAllCategories();
+		
+		
+		$scope.subCategories=function(){
+			 if($scope.category!=="Select Category"){
+				 $scope.subcategories=[];
+				 $scope.subcategories=JSON.parse($scope.category).subcategories;
+				 $scope.problem.category=JSON.parse($scope.category).categoryName;
+			 }else{
+				 $scope.subcategories=[];
+				 $scope.problem.category="";
+				 $scope.problem.subcategory="Select Subcategory";
+			 }
+		 };
+		
 		$scope.submitProblem=function(){
 			$scope.errorMessage="";
 			$scope.successMessage="";
@@ -713,7 +761,7 @@
 		};
 	};
 	
-	problemController.$inject=['$scope','problemsFactory','dashboardUserDetailsService','$rootScope','dashboardSpinnerService','$state','$stateParams'];
+	problemController.$inject=['$scope','problemsFactory','dashboardUserDetailsService','$rootScope','dashboardSpinnerService','$state','$stateParams','categoryFactory'];
 	
 	angular.module('amoeba.dashboard').controller("problemController",problemController);
 	
@@ -1048,9 +1096,22 @@
 			return defered.promise;
 		};
 		
+		function getAllCategories(){
+			var registerResource=$resource("/categories/allCategories");
+			var defered=$q.defer();
+			registerResource.query(
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
 		return {
 			getCategories:getCategories,
-			submitCategory:submitCategory
+			submitCategory:submitCategory,
+			getAllCategories:getAllCategories
 		};
 	};
 	
