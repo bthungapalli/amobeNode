@@ -1,6 +1,6 @@
  {
-  "port": "3000",
-  "httpsport":"443",
+  "port": "9000",
+  "httpsport":"9006",
    "sessionDetails":{
 	   "cookieName":"session",
 	   "secretKey":"recalls",
@@ -17,20 +17,20 @@
    "mail":{
 	  "recallSupport":"apatha@osius.com",
 		"subject":"[Amoeba] ",
-		"appURL" : "http://osiwizz.osius.com",
+		"appURL" : "http://ec2-52-25-181-47.us-west-2.compute.amazonaws.com/amoeba",
 		"appName":"Amoeba"
    },
    "smtpConfig":{
-	   "host":"smtp.gmail.com",
-	   "port":465,
-	   "authUser":"pathaalok@gmail.com",
-       "authPassword":"loki@2015"
+	   "host":"mail.logistic-solutions.com",
+	   "port":587,
+	   "authUser":"alerts@logistic-solutions.com",
+       "authPassword":"WelcomeLSI"
    },
    "context":{
-	   	"path":"http://localhost:3000/images/logo.png"
+	   	"path":"http://localhost:9000/images/logo.png"
   },
    "recall":{
-	   "filesPath":"/Users/apatha/Desktop/uploads/"
+	   "filesPath":"/opt/amoeba/uploads/"
    }
 
 }

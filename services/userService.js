@@ -53,7 +53,8 @@ return{
 			 }
    },
 	 checkUser:function(user,callbackForCheckUser){
-		 var query = userModel.findOne({"email":user.email,"isActive":true});
+//		 var query = userModel.findOne({"email":user.email,"isActive":true});
+		var query = userModel.findOne({"email":user.email});	
 		 this.execute(query,callbackForCheckUser);
 	 },
 	 getAllUsers:function(callbackForGetAllUsers){
