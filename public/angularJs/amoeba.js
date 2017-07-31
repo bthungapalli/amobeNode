@@ -64,7 +64,11 @@
 		            url: '/solution/:problemId',
 		            templateUrl: 'partials/dashboard/solution.html',
 		            controller:'solutionController'
-		        }) ;
+		        }).state('dashboard.reRouteProblems', {
+		            url: '/rerouteproblems',
+		            templateUrl: 'partials/dashboard/reRouteProblems.html',
+		            controller:'reRouteProblemsController'
+		        })  ;
 		    
 		    $urlRouterProvider.otherwise('/');
 	});

@@ -100,6 +100,33 @@
 			return defered.promise;
 		};
 		
+		function getBlockedAcceptedProblems(){
+			var submitProblem=$resource("/problems/blockedAcceptedProblems");
+			var defered=$q.defer();
+			submitProblem.query(
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
+		
+		
+		function saveNewConsultant(name,id){
+			var payload =  {"email":name,"problemId":id};
+			var submitProblem=$resource("/problems/newConsultant");
+			var defered=$q.defer();
+			submitProblem.save(payload,
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
 		return {
 			submitProblem:submitProblem,
 			getProblems:getProblems,
@@ -108,7 +135,9 @@
 			acceptProblem:acceptProblem,
 			getAcceptedProblems:getAcceptedProblems,
 			submitSolution:submitSolution,
-			getSolutionByProblemId:getSolutionByProblemId
+			getSolutionByProblemId:getSolutionByProblemId,
+			getBlockedAcceptedProblems:getBlockedAcceptedProblems,
+			saveNewConsultant:saveNewConsultant
 		};
 	};
 	

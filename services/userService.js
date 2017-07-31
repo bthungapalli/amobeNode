@@ -79,6 +79,12 @@ return{
 		 var query = userModel.find(condition); 
 		 this.execute(query,callbackForGetUsersBasedonCatAndSubcategory);
 	 },
+	 getUsersForProblem:function(category,subcategory,accepted_by,callbackForGetUsersForProblem){
+		 var condition={ "category.categoryName": { $in: [category] },"category.subcategories": { $in: [subcategory] }
+                        ,"email":{$nin: accepted_by} };
+		 var query = userModel.find(condition); 
+		 this.execute(query,callbackForGetUsersForProblem);
+	 }
 
 }
 }

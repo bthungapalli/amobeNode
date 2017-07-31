@@ -156,6 +156,19 @@ router.post('/filterRecalls',checkSession.requireLogin,function (req,res,next){
 });
 
 
+router.post('/newConsultant',checkSession.requireLogin,function (req,res,next){
+	var body = req.body;
+		var user=req.session.user;
+	problemsService.saveNewConsultant(body,function(err,recall){
+		if(err)
+    		res.send("error");
+		res.json(recall);
+	});
+});
+
+
+
+
 router.get('/problem/:id',checkSession.requireLogin,function (req,res,next){
 		var problemId=req.params.id;
 		problemsService.getProblemById(problemId,function(err,problem){
@@ -189,6 +202,30 @@ router.get('/acceptedProblems',checkSession.requireLogin,function (req,res,next)
 		res.json(problems);
 	});
 });
+
+
+router.get('/blockedAcceptedProblems',checkSession.requireLogin,function (req,res,next){
+	var user=req.session.user;
+	
+	problemsService.getSolutions(function(err,solutions){
+		if(err)
+    		res.send("error");
+		
+		var solutionIds=[];
+		solutions.forEach(function(solution){
+			solutionIds.push(solution._id);
+		});
+		
+		problemsService.getBlockedAcceptedProblems(solutionIds,function(err,problems){
+			if(err)
+	    		res.send("error");
+			console.log("in")
+			res.json(problems);
+		});
+	})
+	
+});
+
 
 
 router.delete('/:id',checkSession.requireLogin,function (req,res,next){

@@ -23,6 +23,7 @@ var ProblemSchema = new Schema({
     username:{type: String, required: true},
     accepted:{type: Boolean, required: false,default: false},
     accepted_by:{type: String, required: false},
+    accepted_at:{type: Date, required: false},
     created_by:{type: String, required: true},
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}

@@ -103,7 +103,7 @@ return{
 	 },
      acceptProblem:function(user,problem,callbackForGetAllProblems){
 	   var conditions = { "_id":problem._id };
-		 var update = { $set: {"accepted":true,"accepted_by":user.email}};
+		 var update = { $set: {"accepted":true,"accepted_by":user.email,"accepted_at":new Date()}};
 		 this.update(problem,conditions,update,callbackForGetAllProblems);
 	 },
 	 getAllProblems:function(user,callbackForGetAllProblems){
@@ -207,7 +207,20 @@ return{
 	 },
 	 deleteRecall:function(id,callbackForDeleteRecall){
 		 this.delete({"_id":id},callbackForDeleteRecall);
-	 }
+	 },
+	 getSolutions:function(callbackForGetSolutions){
+		 var query =solutionModel.find();
+		 this.execute(query,callbackForGetSolutions);
+	 },
+	 getBlockedAcceptedProblems:function(solutionIds,callbackForGetBlockedAcceptedProblems){
+		 var query =problemModel.find({"accepted" : true,"_id":{$nin: solutionIds}}).sort({"accepted_at": -1});
+		 this.execute(query,callbackForGetBlockedAcceptedProblems);
+	 },
+	 saveNewConsultant:function(body,callbackForGetAllProblems){
+		   var conditions = { "_id":body.problemId };
+			 var update = { $set: {"accepted_by":body.email,"accepted_at":new Date()}};
+			 this.update(body,conditions,update,callbackForGetAllProblems);
+		 }
 
 }
 }

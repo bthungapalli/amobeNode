@@ -1,0 +1,60 @@
+<div class="col-xs-12">
+
+<h3>{{title}} Problems</h3>
+<hr style="margin-top: 0px;margin-bottom: 15px;border-top: 2.5px solid #1abb9c;">
+ 
+<div class="col-xs-4">
+
+
+			 <div class="form-group">
+    <label for="exampleInputPassword1">Problems Per Page</label>
+    <select class="form-control" ng-model="itemsPerPage">
+					 <option  value="5">5</option>
+			  <option value="10">10</option>
+			  <option value="25">25</option>
+			  <option value="50">50</option>
+					</select>
+  </div>		
+					
+	</div>
+	
+		<div class="col-xs-8">
+			 <div class="form-group">
+    <label for="exampleInputPassword1">Search</label>
+    <input type="text" class="form-control" id="exampleInputPassword1"  ng-model="search" placeholder="Search">
+  </div>
+			</div>
+			
+	<div class="col-xs-12" ng-if="errorMessage"><label class="text-danger">{{errorMessage}}</label></div>
+  <div class="col-xs-12" ng-if="successMessage"><label class="text-success">{{successMessage}}</label></div>		
+			
+	<div class="col-xs-12" dir-paginate="problem in problems |filter:search|itemsPerPage:itemsPerPage" style="margin-bottom: 5px;cursor: pointer;">
+	<div class="col-xs-12" style="background-color: #c8e1c1;" ng-click="problem.show=!problem.show;getUsersForProblem(problem);">
+	<h3 style="margin-top: 5px;margin-bottom: 5px;">{{problem.title}} 
+	<span  class="label label-success" style="float: right">{{problem.category}} {{problem.subcategory}}</span>
+	
+	</h3>
+
+	<p style="margin-bottom: 0px;">{{problem.anonymous?'':problem.username}}  <span class="glyphicon glyphicon-calendar" style="color:#40c15d"></span>{{problem.created_at | date:'dd MMM yyyy'}}</p>
+	</div>
+	<div class="col-xs-12"  style="border:1px solid #00b3ac;" ng-if="problem.show">
+	<lablel>Summary: </lablel>
+	<p>{{problem.summary}}</p>
+	<lablel>Description: </lablel>
+	<p>{{problem.description}}</p>
+	
+	
+	<select ng-model="newConsultant">
+	<option>Select Consultant</option>
+	<option ng-repeat="user in users" value="{{user.email}}">{{user.firstName}} {{user.lastName}} </option>
+	</select>
+    <button type="button" ng-disabled="newConsultant=='Select Consultant'" ng-click="saveNewConsultant(problem);" class="btn btn-success">Save</button>
+	
+	
+	</div>
+	
+	</div>		
+	
+	<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+			
+</div>

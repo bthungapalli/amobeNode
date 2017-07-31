@@ -27,9 +27,24 @@
 			return defered.promise;
 		};
 		
+		function getUsersForProblem(category,subcategory,name){
+			var updatePasswordResource=$resource("/userManagement/usersForProblem/"+category+"/"+subcategory+"/"+name);
+			var defered=$q.defer();
+			updatePasswordResource.query(
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
+		
+		
 		return {
 			activateOrDeactivateUsers:activateOrDeactivateUsers,
-			getAllUsers:getAllUsers
+			getAllUsers:getAllUsers,
+			getUsersForProblem:getUsersForProblem
 		};
 	};
 	

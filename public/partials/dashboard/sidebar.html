@@ -12,6 +12,7 @@
         <li ng-if="userDetails.role=='User'"> <a ng-click="setSideBarActive('myProblems','dashboard.myProblems');" ng-class="{'sideBarActive':currentView==='myProblems'}" > <i class="fa fa-sun-o"></i> <span>My Problems</span> <span class="pull-right-container"></span> </a></li>
         <li ng-if="userDetails.role=='Consultant'"> <a ng-click="setSideBarActive('acceptedProblems','dashboard.acceptedProblems');" ng-class="{'sideBarActive':currentView==='acceptedProblems'}" > <i class="fa fa-sun-o"></i> <span>Accepted Problems</span> <span class="pull-right-container"></span> </a></li>
         <li ng-if="userDetails.role=='Admin'"> <a ng-click="setSideBarActive('categories','dashboard.categories');" ng-class="{'sideBarActive':currentView==='categories'}" > <i class="fa fa-sun-o"></i> <span>Categories</span> <span class="pull-right-container"></span> </a></li>
+        <li ng-if="userDetails.role=='Admin'"> <a ng-click="setSideBarActive('reRouteProblems','dashboard.reRouteProblems');" ng-class="{'sideBarActive':currentView==='reRouteProblems'}" > <i class="fa fa-sun-o"></i> <span>Re-Route Problems</span> <span class="pull-right-container"></span> </a></li>
         <li > <a ng-click="setSideBarActive('profile','dashboard.profile');" ng-class="{'sideBarActive':currentView==='profile'}"> <i class="fa fa-sun-o"></i> <span>Profile</span> <span class="pull-right-container"></span> </a></li>
        
         </ul>

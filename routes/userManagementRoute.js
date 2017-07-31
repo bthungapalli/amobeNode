@@ -22,4 +22,16 @@ router.post('/activeOrInActivateUser',checkSession.requireLogin,function (req,re
 });
 
 
+router.get('/usersForProblem/:category/:subcategory/:name',checkSession.requireLogin,function (req,res,next){
+	var category=req.params.category;
+	var subcategory=req.params.subcategory;
+	var name=req.params.name;
+	userService.getUsersForProblem(category,subcategory,name,function(err,users){
+		if(err)
+    		res.send("error");
+		res.json(users);
+	});
+});
+
+
 module.exports = router;
