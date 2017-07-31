@@ -39,11 +39,13 @@
 		 };
 		 
 		 $scope.editCategory=function(category){
-			 $scope.categories.forEach(function(cat){
+			 var categories=angular.copy($scope.categories);
+			 categories.forEach(function(cat){
 				 if(cat._id==category._id){
 					 $scope.editCategoryName=cat.categoryName;
 					 $scope.loginDetails.category1=cat;
 				     $scope.loginDetails.subcategoryList=category.subcategories;
+				     $scope.loginDetails.subcategories=cat.subcategories;
 				 }
 			 });
 		 };
