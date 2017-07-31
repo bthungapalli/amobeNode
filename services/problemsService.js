@@ -107,8 +107,18 @@ return{
 		 this.update(problem,conditions,update,callbackForGetAllProblems);
 	 },
 	 getAllProblems:function(user,callbackForGetAllProblems){
-		 var condition;
-		 condition={"status":"SAVE","accepted":false};
+		 var categories=[];
+		 var subcategories=[];
+		 user.category.forEach(function(cat){
+			 categories.push(cat.categoryName);
+			 cat.subcategories.forEach(function(subcat){
+				 subcategories.push(subcat);
+			 })
+		 });
+		 
+		 var condition={"status":"SAVE","accepted":false,"category":{ $in: categories },"subcategory":{ $in:subcategories }};
+		 
+		 console.log("********"+JSON.stringify(condition)+"**********")
 		 var query =problemModel.find(condition);
 		 this.execute(query,callbackForGetAllProblems);
 	 },
