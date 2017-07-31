@@ -69,7 +69,24 @@
 				    <label for="exampleInputPassword1">Weight</label>
                    <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number"  min="0" placeholder="weight" ng-model="userDetails.weight" required >
 				  </div>
-				  
+				  <div class="form-group col-xs-12" ng-if="userDetails.role==='Consultant'">
+				  <table class="table table-hover " style="background-color: white">
+				    <thead>
+				      <tr>
+				        <th>Category Name</th>
+				        <th>Subcategory Name</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <tr  dir-paginate="category in userDetails.category |filter:search|itemsPerPage:itemsPerPage">
+				        <td>{{category.categoryName}} </td>
+				        <td><span ng-repeat="subcategory in category.subcategories"> {{category.subcategories.length==$index+1?subcategory:subcategory+','}}</span> </td>
+				      </tr>
+				    </tbody>
+				  </table>
+				
+				<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
+				  </div>
                 </div>
                 <div class="modal-footer">
                   <div>
