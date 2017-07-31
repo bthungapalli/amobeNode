@@ -56,38 +56,42 @@ router.post('/createProblem',checkSession.requireLogin,function (req,res,next){
 		var problem = req.body;
 		var user=req.session.user;
 		
-		
-		
-		
-		problemsService.createOrUpdateProblem(user,problem,function(err,problemResponse){
-			if(err)
-        		res.send("error");
-			console.log(problem.status + "*******"+ problemResponse.status);
-			if((problem.status=="DRAFT" && problemResponse.status=="SAVE") || (problem._id==undefined && problem.status=="SAVE")){
-				userService.getUsersBasedonCatAndSubcategory(problem,function(err,users){
-					users.forEach(function(user){
-						var subject =  nconf.get("mail").subject+" New Problem Created";
-						var template = "newProblem.html";
+			problemsService.getProblemById(problem._id,function(err,presentProblem){
+				
+				if(err)
+					res.send("error");
+				
+				problemsService.createOrUpdateProblem(user,problem,function(err,problemResponse){
+					if(err)
+		        		res.send("error");
+					if((presentProblem !=null && presentProblem.status=="DRAFT" && problemResponse.status=="SAVE") || (problem._id==undefined && problem.status=="SAVE")){
+						userService.getUsersBasedonCatAndSubcategory(problem,function(err,users){
+							users.forEach(function(user){
+								var subject =  nconf.get("mail").subject+" New Problem Created";
+								var template = "newProblem.html";
 
-						var context =  {
-								title : nconf.get("mail").appName,
-								appURL : nconf.get("mail").appURL,
-								appName : nconf.get("mail").appName,
-								problemTitle: problem.title,
-								problemCategory:problem.category,
-								problemSubcategory:problem.subcategory,
-								name:user.firstName+ " " +user.lastName
-							};
-						mailUtil.sendMail(user.email,nconf.get("smtpConfig").authUser,subject,template,context,function(err){
-						
-					});
-						
-					});
+								var context =  {
+										title : nconf.get("mail").appName,
+										appURL : nconf.get("mail").appURL,
+										appName : nconf.get("mail").appName,
+										problemTitle: problem.title,
+										problemCategory:problem.category,
+										problemSubcategory:problem.subcategory,
+										name:user.firstName+ " " +user.lastName
+									};
+								mailUtil.sendMail(user.email,nconf.get("smtpConfig").authUser,subject,template,context,function(err){
+								
+							});
+								
+							});
+						});
+					};
+				    
+					res.json(problemResponse);
 				});
-			};
-		    
-			res.json(problemResponse);
-		});
+				
+			})
+		
 });
 
 
