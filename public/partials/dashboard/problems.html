@@ -42,11 +42,12 @@
 	<lablel>Summary: </lablel>
 	<p>{{problem.summary}}</p>
 	<lablel>Description: </lablel>
-	<p>{{problem.description}}</p>
+	<p ng-bind-html="problem.description | toTrustHtml"></p>
+	
 	
 	<div ng-if="problem.solution.description">
 	<lablel>Solution By {{problem.solution.username}} </lablel>
-	<p>{{problem.solution.description}}</p>
+	<p ng-bind-html="problem.solution.description | toTrustHtml"></p>
 	</div>
 	 <div class="col-xs-12 text-center" >
 	 <button type="button" ng-if="acceptedProblems" ng-click="submitSolution(problem);" class="btn btn-success">Solution</button>

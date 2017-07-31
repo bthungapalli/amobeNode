@@ -1,6 +1,6 @@
 (function(){
 	
-	var appModule=angular.module('amoeba',['ui.bootstrap','angularUtils.directives.dirPagination','ngRoute','ui.router','darthwade.dwLoading','duScroll','amoeba.home','amoeba.dashboard']);
+	var appModule=angular.module('amoeba',['ui.bootstrap','angularUtils.directives.dirPagination','ngRoute','ui.router','darthwade.dwLoading','duScroll','ui.tinymce','amoeba.home','amoeba.dashboard']);
 
 	angular.element(document).ready(function() {
 	    angular.bootstrap(document, ['amoeba']);
@@ -1687,6 +1687,13 @@ angular.module('amoeba.dashboard')
 			  return tabName
 		  };
 });
+
+angular.module('amoeba.dashboard')
+    .filter('toTrustHtml', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]);
 
 (function(){
 	
