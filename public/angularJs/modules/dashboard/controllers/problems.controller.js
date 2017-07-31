@@ -9,6 +9,7 @@
 		$scope.problems=[];
 		$scope.solution={};
 		$scope.itemsPerPage="5";
+		$scope.title="";
 		$scope.getProblems=function(){
 			$scope.errorMessage="";
 			$scope.successMessage="";
@@ -63,12 +64,15 @@
 		if($state.current.name==="dashboard.myProblems"){
 			$scope.getMyProblems();
 			$scope.myProblems=true;
+			$scope.title="My";
 		}else if($state.current.name==="dashboard.problems"){
 			$scope.allProblems=true;
 			$scope.getProblems();
+			$scope.title="All";
 		}else if($state.current.name==="dashboard.acceptedProblems"){
 			$scope.acceptedProblems=true;
 			$scope.getAcceptedProblems();
+			$scope.title="Accepted";
 		}
 		
 		$scope.editProblem=function(problem){

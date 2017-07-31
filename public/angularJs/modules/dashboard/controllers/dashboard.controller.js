@@ -29,6 +29,15 @@
 			angular.extend($scope.userDetails,args);
 			dashboardUserDetailsService.setUserDetails(args);
 		});
+		
+		$scope.setSideBarActive=function(view,state){
+			$scope.currentView=view;
+			if(state==="dashboard.problem"){
+				$state.go('dashboard.problem', {"problemId": 0})	
+			}else{
+				$state.go(state);
+			}
+		};
 	};
 	
 	
