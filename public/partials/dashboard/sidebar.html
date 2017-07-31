@@ -5,7 +5,7 @@
       
      
        <ul class="sidebar-menu" >
-        <li class="header">{{userDetails.role|uppercase}}</li>
+        <li class="header text-center"><span>{{userDetails.role|uppercase}}</span></li>
         <li ng-if="userDetails.role=='Admin'"> <a ng-click="setSideBarActive('allUsers','dashboard.allUsers');" ng-class="{'sideBarActive':currentView==='allUsers'}" > <i class="fa fa-sun-o"></i> <span>Users</span> <span class="pull-right-container"></span> </a></li>
         <li ng-if="userDetails.role=='User'"> <a ng-click="setSideBarActive('postProblem','dashboard.problem');" ng-class="{'sideBarActive':currentView==='postProblem'}"> <i class="fa fa-sun-o"></i> <span>Post Problem</span> <span class="pull-right-container"></span> </a></li>
         <li ng-if="userDetails.role=='Consultant'"> <a ng-click="setSideBarActive('allProblems','dashboard.problems');" ng-class="{'sideBarActive':currentView==='allProblems'}" > <i class="fa fa-sun-o"></i> <span>All Problems</span> <span class="pull-right-container"></span> </a></li>

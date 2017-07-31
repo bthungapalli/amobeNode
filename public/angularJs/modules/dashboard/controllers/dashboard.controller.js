@@ -6,7 +6,7 @@
 			$scope.userDetails=angular.copy($rootScope.userDetails);
 			dashboardUserDetailsService.setUserDetails($rootScope.userDetails);
 			$scope.addRemoveClassToSideBar=dashboardUserDetailsService.addRemoveClassToSideBar;
-			
+			$scope.currentView="profile";
 			$state.go('dashboard.profile');
 			
 		}else{

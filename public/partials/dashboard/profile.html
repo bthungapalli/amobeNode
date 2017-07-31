@@ -69,18 +69,45 @@
 				    <label for="exampleInputPassword1">Weight</label>
                    <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number"  min="0" placeholder="weight" ng-model="userDetails.weight" required >
 				  </div>
+				  
+				  
+				   <div class="form-group col-xs-12" ng-if="userDetails.role==='Consultant' && editProfile && !editCategoryName">
+				    <label for="exampleInputEmail1">Category </label>
+                   <select  class="form-control topMarginForRegister" ng-model="loginDetails.category1" ng-change="getSubCategories();">
+                   <option>Select Category</option>
+                   <option ng-repeat="category in categories" value="{{category}}">{{category.categoryName}}</option>
+                   </select>
+				  </div>
+				  
+				  <div class="form-group col-xs-12" ng-if="userDetails.role==='Consultant' && editProfile && editCategoryName">
+				    <label for="exampleInputPassword1">Category</label>
+                   <input id="register_country" ng-if="editCategoryName" disabled class="form-control topMarginForRegister" type="text" placeholder="Zip code" ng-model="editCategoryName"  >
+				  </div>
+				  
+				   <div class="form-group col-xs-12" ng-if="userDetails.role==='Consultant' && loginDetails.category1!='Select Category' && editProfile">
+                  <label for="exampleInputEmail1">Sub Category</label>
+                   <select class="form-control topMarginForRegister" ng-model="loginDetails.subcategoryList" multiple>
+                   <option ng-repeat="subcategory in loginDetails.subcategories" value="{{subcategory}}">{{subcategory}}</option>
+                   </select>
+                   <button type="button" class="btn btn-primary" ng-click="addCategory();">Add</button>
+                   
+				  </div>
+				  
+				  
 				  <div class="form-group col-xs-12" ng-if="userDetails.role==='Consultant'">
 				  <table class="table table-hover " style="background-color: white">
 				    <thead>
 				      <tr>
 				        <th>Category Name</th>
 				        <th>Subcategory Name</th>
+				         <td ng-if="editProfile" >Action </td>
 				      </tr>
 				    </thead>
 				    <tbody>
 				      <tr  dir-paginate="category in userDetails.category |filter:search|itemsPerPage:itemsPerPage">
 				        <td>{{category.categoryName}} </td>
 				        <td><span ng-repeat="subcategory in category.subcategories"> {{category.subcategories.length==$index+1?subcategory:subcategory+','}}</span> </td>
+				         <td ng-if="editProfile"><button class="btn btn-sm btn-primary" ng-click="editCategory(category,$index);"><span class="glyphicon glyphicon-pencil"></span></button> </td>
 				      </tr>
 				    </tbody>
 				  </table>

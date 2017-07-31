@@ -11,7 +11,7 @@
 					"country":profileDetails.country,"zipcode":profileDetails.zipcode,
 					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address
 					,"zipcode":profileDetails.zipcode,"age":profileDetails.age,"height":profileDetails.height,
-					"weight":profileDetails.weight};
+					"weight":profileDetails.weight,"category":profileDetails.category};
 				updateProfileResource.save(payload,
 			    function(response){
 					defered.resolve(response);
