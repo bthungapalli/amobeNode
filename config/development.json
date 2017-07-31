@@ -23,8 +23,8 @@
    "smtpConfig":{
 	   "host":"smtp.gmail.com",
 	   "port":465,
-	   "authUser":"pathaalok@gmail.com",
-       "authPassword":"loki@2015"
+	   "authUser":"",
+       "authPassword":""
    },
    "context":{
 	   	"path":"http://localhost:3000/images/logo.png"
