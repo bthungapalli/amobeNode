@@ -55,6 +55,10 @@ router.post('/acceptProblem',checkSession.requireLogin,function (req,res,next){
 router.post('/createProblem',checkSession.requireLogin,function (req,res,next){
 		var problem = req.body;
 		var user=req.session.user;
+		
+		
+		
+		
 		problemsService.createOrUpdateProblem(user,problem,function(err,problemResponse){
 			if(err)
         		res.send("error");
