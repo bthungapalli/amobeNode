@@ -29,8 +29,11 @@
 	 				"age":"",
 	 				"height":"",
 	 				"weight":"",
-	 				"category":"Select Category",
+	 				"category":[],
 	 				"subcategory":"Select SubCategory",
+	 				"subcategoryList":[],
+	 				"category1":"Select Category"
+	 				
 	 		};
 	     };
 	     
@@ -128,11 +131,11 @@
 		 };
 		 
 		 $scope.getSubCategories=function(){
-			 if($scope.loginDetails.category!=="Select Category"){
-				 $scope.subcategories=[];
-				 $scope.subcategories=JSON.parse($scope.loginDetails.category).subcategories;
+			 if($scope.loginDetails.category1!=="Select Category"){
+				 $scope.loginDetails.subcategories=[];
+				 $scope.loginDetails.subcategories=JSON.parse($scope.loginDetails.category1).subcategories;
 			 }else{
-				 $scope.subcategories=[];
+				 $scope.loginDetails.subcategories=[];
 			 }
 		 };
 		 
@@ -149,6 +152,16 @@
 	            .catch(function(error){
 	            	
 	            });
+		 };
+		 
+		 $scope.addCategory=function(){
+			 if($scope.loginDetails.subcategoryList.length>0){
+				 var category=JSON.parse($scope.loginDetails.category1)
+				 category.subcategories=$scope.loginDetails.subcategoryList;
+				 $scope.loginDetails.category.push(category);
+				 $scope.loginDetails.category1="Select Category";
+			     $scope.loginDetails.subcategoryList=[];
+			 }
 		 };
 		 
 	};

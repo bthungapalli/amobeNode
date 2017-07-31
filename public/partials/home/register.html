@@ -66,19 +66,45 @@
 				    <label for="exampleInputEmail1">Zip Code</label>
                    <input id="register_country" class="form-control topMarginForRegister" type="number" min="0" placeholder="Zip code" ng-model="loginDetails.zipcode" required >
 				  </div>
+				  
+				  
+				  
 				  <div class="form-group" ng-if="loginDetails.role==='Consultant'">
-				    <label for="exampleInputEmail1">Category</label>
-                   <select ng-model="loginDetails.category" ng-change="getSubCategories();">
+				    <label for="exampleInputEmail1">Category {{category1}}</label>
+                   <select  class="form-control topMarginForRegister" ng-model="loginDetails.category1" ng-change="getSubCategories(loginDetails.category1);">
                    <option>Select Category</option>
                    <option ng-repeat="category in categories" value="{{category}}">{{category.categoryName}}</option>
                    </select>
 				  </div>
-				   <div class="form-group" ng-if="loginDetails.role==='Consultant' && loginDetails.category!='Select Category'">
-                  <label for="exampleInputEmail1">Category</label>
-                   <select ng-model="loginDetails.subcategory" multiple>
-                   <option ng-repeat="subcategory in subcategories" value="{{subcategory}}">{{subcategory}}</option>
+				   <div class="form-group" ng-if="loginDetails.role==='Consultant' && loginDetails.category1!='Select Category'">
+                  <label for="exampleInputEmail1">Sub Category</label>
+                   <select class="form-control topMarginForRegister" ng-model="loginDetails.subcategoryList" multiple>
+                   <option ng-repeat="subcategory in loginDetails.subcategories" value="{{subcategory}}">{{subcategory}}</option>
                    </select>
+                   <button type="button" class="btn btn-primary" ng-click="addCategory(subcategoryList);">Add</button>
+                   
 				  </div>
+				  
+				  
+  <table ng-if="loginDetails.role==='Consultant' && loginDetails.category.length>0" class="table table-hover" style="background-color: white">
+    <thead>
+      <tr>
+        <th>Category Name</th>
+        <th>Subcategory Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  ng-repeat="category in loginDetails.category">
+        <td>{{category.categoryName}} </td>
+        <td><span ng-repeat="subcategory in category.subcategories"> {{category.subcategories.length==$index+1?subcategory:subcategory+','}}</span> </td>
+      </tr>
+    </tbody>
+  </table>
+				  
+				  
+				  
+				  
+				  
 				  <div class="form-group" ng-if="loginDetails.role==='User'">
 				    <label for="exampleInputEmail1">Age</label>
                    <input id="register_country" class="form-control topMarginForRegister" type="number" min="0" placeholder="age" ng-model="loginDetails.age" required >
@@ -95,7 +121,7 @@
                 </div>
                 <div class="modal-footer">
                   <div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="registerForm.$invalid || (loginDetails.role==='Consultant' & (loginDetails.category==='Select Category' || loginDetails.subcategory==='Select SubCategory'))">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="registerForm.$invalid || loginDetails.category.length===0">Register</button>
                   </div>
                   <div>
                     <button id="register_login_btn" type="button" class="btn btn-link" ng-click="changeBodyTemplate('partials/home/loginBody.html');">Log In</button>

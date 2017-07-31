@@ -41,7 +41,7 @@ return{
 				 	 }
 				 	 var userCreated = new userModel({"_id":counter.seq,"firstName": user.firstName,"lastName": user.lastName,"password":user.password,
 					"email":user.email,"mobileNumber":user.mobileNumber,"address":user.address,"city":user.city,"state":user.state,"zipcode":user.zipcode,
-					"gender":user.gender,"role":user.role,"age":user.age,"height":user.height,"weight":user.weight,"category":JSON.parse(user.category),"last_login":new Date()});
+					"gender":user.gender,"role":user.role,"age":user.age,"height":user.height,"weight":user.weight,"category":user.category,"isActive": true,"last_login":new Date()});
 				 	 serviceObj.save(userCreated,callbackForCreateOrUpdateUser);
 				 });
 			 }else{
