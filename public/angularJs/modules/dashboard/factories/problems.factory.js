@@ -65,7 +65,7 @@
 		
 
 		function getAcceptedProblems(){
-			var submitProblem=$resource("/problems/acceptedProblem");
+			var submitProblem=$resource("/problems/acceptedProblems");
 			var defered=$q.defer();
 			submitProblem.query(
 		    function(response){

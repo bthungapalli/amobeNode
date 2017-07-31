@@ -32,6 +32,22 @@ router.post('/acceptProblem',checkSession.requireLogin,function (req,res,next){
 			if(err)
     		res.send("error");
 			
+			var subject =  nconf.get("mail").subject+"Problem Accepted";
+			var template = "acceptedProblem.html";
+
+			var context =  {
+					title : nconf.get("mail").appName,
+					appURL : nconf.get("mail").appURL,
+					appName : nconf.get("mail").appName,
+					problemTitle: problem.title,
+					problemCategory:problem.category,
+					problemSubcategory:problem.subcategory,
+					consultant:user.firstName+ " " +user.lastName
+				};
+			mailUtil.sendMail(problem.created_by,nconf.get("smtpConfig").authUser,subject,template,context,function(err){
+			
+		});
+			
 			res.json(responseproblem);
 		});
 });
@@ -42,8 +58,31 @@ router.post('/createProblem',checkSession.requireLogin,function (req,res,next){
 		problemsService.createOrUpdateProblem(user,problem,function(err,problemResponse){
 			if(err)
         		res.send("error");
+			console.log(problem.status + "*******"+ problemResponse.status);
+			if((problem.status=="DRAFT" && problemResponse.status=="SAVE") || (problem._id==undefined && problem.status=="SAVE")){
+				userService.getUsersBasedonCatAndSubcategory(problem,function(err,users){
+					users.forEach(function(user){
+						var subject =  nconf.get("mail").subject+" New Problem Created";
+						var template = "newProblem.html";
 
-						res.json(problemResponse);
+						var context =  {
+								title : nconf.get("mail").appName,
+								appURL : nconf.get("mail").appURL,
+								appName : nconf.get("mail").appName,
+								problemTitle: problem.title,
+								problemCategory:problem.category,
+								problemSubcategory:problem.subcategory,
+								name:user.firstName+ " " +user.lastName
+							};
+						mailUtil.sendMail(user.email,nconf.get("smtpConfig").authUser,subject,template,context,function(err){
+						
+					});
+						
+					});
+				});
+			};
+		    
+			res.json(problemResponse);
 		});
 });
 
@@ -54,6 +93,19 @@ router.post('/solution',checkSession.requireLogin,function (req,res,next){
 	problemsService.createOrUpdateSolution(user,solution,function(err,solutionResponse){
 		if(err)
     		res.send("error");
+		
+		var subject =  nconf.get("mail").subject+" Solution Provided";
+		var template = "solution.html";
+
+		var context =  {
+				title : nconf.get("mail").appName,
+				appURL : nconf.get("mail").appURL,
+				appName : nconf.get("mail").appName,
+				problemTitle: solution.problemTitle,
+			};
+		mailUtil.sendMail(solution.problemCreatedBy,nconf.get("smtpConfig").authUser,subject,template,context,function(err){
+		
+	});
 
 					res.json(solutionResponse);
 	});
@@ -121,9 +173,9 @@ router.get('/solution/:problemId',checkSession.requireLogin,function (req,res,ne
 
 
 
-router.get('/acceptedProblem',checkSession.requireLogin,function (req,res,next){
+router.get('/acceptedProblems',checkSession.requireLogin,function (req,res,next){
 	var user=req.session.user;
-	problemsService.getAcceptedProblem(user,function(err,problems){
+	problemsService.getAcceptedProblems(user,function(err,problems){
 		if(err)
     		res.send("error");
 		res.json(problems);

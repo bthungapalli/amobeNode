@@ -5,7 +5,6 @@
 		$scope.errorMessage="";
 		$scope.successMessage="";
 		$scope.editProblem=false;
-		$scope.category="Select Category";
 		$scope.categories=[];
 		$scope.init=function(){
 			$scope.problem={
@@ -15,7 +14,8 @@
 					"status":"",
 					"anonymous":false,
 					"category":"",
-					"subcategory":"Select Subcategory"
+					"subcategory":"Select Subcategory",
+					"tempCategory":"Select Category"
 					
 			};
 		}
@@ -59,10 +59,10 @@
 		
 		
 		$scope.subCategories=function(){
-			 if($scope.category!=="Select Category"){
+			 if($scope.problem.tempCategory!=="Select Category"){
 				 $scope.subcategories=[];
-				 $scope.subcategories=JSON.parse($scope.category).subcategories;
-				 $scope.problem.category=JSON.parse($scope.category).categoryName;
+				 $scope.subcategories=JSON.parse($scope.problem.tempCategory).subcategories;
+				 $scope.problem.category=JSON.parse($scope.problem.tempCategory).categoryName;
 			 }else{
 				 $scope.subcategories=[];
 				 $scope.problem.category="";
@@ -76,7 +76,7 @@
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.submitProblem($scope.problem).then(function (response) {
 				$scope.init();
-				$state.go("dashboard.problems");
+				$state.go("dashboard.myProblems");
 				dashboardSpinnerService.stopSpinner();
             })
             .catch(function(error){

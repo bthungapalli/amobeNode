@@ -10,7 +10,7 @@
 		<div class="col-xs-6">
 			<div class="form-group">
 				<label for="exampleInputPassword1">Category <sup class="text-danger">*</sup></label> 
-				<select ng-if="!editProblem" class="form-control" ng-model="category" ng-change="subCategories();"required>
+				<select ng-if="!editProblem" class="form-control" ng-model="problem.tempCategory" ng-change="subCategories();" required>
 					<option>Select Category</option>
 					<option ng-repeat="category in categories" value="{{category}}">{{category.categoryName}}</option>
 				</select>

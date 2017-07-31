@@ -7,7 +7,9 @@
 		
 		$scope.solution={
 				"description":"",
-				"problemId":$scope.problemId
+				"problemId":$scope.problemId,
+				"problemTitle":"",
+				"problemCreatedBy":"",
 		}
 		
 		$scope.getProblem=function(){
@@ -16,6 +18,8 @@
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblem($scope.problemId).then(function (response) {
 				$scope.problem=response;
+				$scope.solution.problemTitle=response.title;
+				$scope.solution.problemCreatedBy=response.created_by;
 				dashboardSpinnerService.stopSpinner();
             })
             .catch(function(error){

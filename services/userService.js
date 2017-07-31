@@ -72,7 +72,12 @@ return{
 	 getAllUsersBasedOnCategory:function(category,callbackForGetAllUsersBasedOnCategory){
 		 var query = userModel.find({ "categories": { $in: [category] } }); 
 		 this.execute(query,callbackForGetAllUsersBasedOnCategory);
-	 }
+	 },
+	 getUsersBasedonCatAndSubcategory:function(problem,callbackForGetUsersBasedonCatAndSubcategory){
+		 var condition={ "category.categoryName": { $in: [problem.category] },"category.subcategories": { $in: [problem.subcategory] } };
+		 var query = userModel.find(condition); 
+		 this.execute(query,callbackForGetUsersBasedonCatAndSubcategory);
+	 },
 
 }
 }

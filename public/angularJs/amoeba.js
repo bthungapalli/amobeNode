@@ -60,6 +60,10 @@
 		            url: '/categories',
 		            templateUrl: 'partials/dashboard/categories.html',
 		            controller:'categoriesController'
+		        }).state('dashboard.solution', {
+		            url: '/solution/:problemId',
+		            templateUrl: 'partials/dashboard/solution.html',
+		            controller:'solutionController'
 		        }) ;
 		    
 		    $urlRouterProvider.otherwise('/');

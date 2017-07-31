@@ -95,7 +95,7 @@ return{
 			 }
    },
    
-   getAcceptedProblem:function(user,callbackForGetAcceptedProblems){
+   getAcceptedProblems:function(user,callbackForGetAcceptedProblems){
 		 var condition;
 		 condition={"accepted_by":user.email,"accepted":true};
 		 var query =problemModel.find(condition);
@@ -118,7 +118,6 @@ return{
 		 
 		 var condition={"status":"SAVE","accepted":false,"category":{ $in: categories },"subcategory":{ $in:subcategories }};
 		 
-		 console.log("********"+JSON.stringify(condition)+"**********")
 		 var query =problemModel.find(condition);
 		 this.execute(query,callbackForGetAllProblems);
 	 },

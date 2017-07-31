@@ -60,6 +60,10 @@
 		            url: '/categories',
 		            templateUrl: 'partials/dashboard/categories.html',
 		            controller:'categoriesController'
+		        }).state('dashboard.solution', {
+		            url: '/solution/:problemId',
+		            templateUrl: 'partials/dashboard/solution.html',
+		            controller:'solutionController'
 		        }) ;
 		    
 		    $urlRouterProvider.otherwise('/');
@@ -717,7 +721,6 @@
 		$scope.errorMessage="";
 		$scope.successMessage="";
 		$scope.editProblem=false;
-		$scope.category="Select Category";
 		$scope.categories=[];
 		$scope.init=function(){
 			$scope.problem={
@@ -727,7 +730,8 @@
 					"status":"",
 					"anonymous":false,
 					"category":"",
-					"subcategory":"Select Subcategory"
+					"subcategory":"Select Subcategory",
+					"tempCategory":"Select Category"
 					
 			};
 		}
@@ -771,10 +775,10 @@
 		
 		
 		$scope.subCategories=function(){
-			 if($scope.category!=="Select Category"){
+			 if($scope.problem.tempCategory!=="Select Category"){
 				 $scope.subcategories=[];
-				 $scope.subcategories=JSON.parse($scope.category).subcategories;
-				 $scope.problem.category=JSON.parse($scope.category).categoryName;
+				 $scope.subcategories=JSON.parse($scope.problem.tempCategory).subcategories;
+				 $scope.problem.category=JSON.parse($scope.problem.tempCategory).categoryName;
 			 }else{
 				 $scope.subcategories=[];
 				 $scope.problem.category="";
@@ -788,7 +792,7 @@
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.submitProblem($scope.problem).then(function (response) {
 				$scope.init();
-				$state.go("dashboard.problems");
+				$state.go("dashboard.myProblems");
 				dashboardSpinnerService.stopSpinner();
             })
             .catch(function(error){
@@ -1030,7 +1034,9 @@
 		
 		$scope.solution={
 				"description":"",
-				"problemId":$scope.problemId
+				"problemId":$scope.problemId,
+				"problemTitle":"",
+				"problemCreatedBy":"",
 		}
 		
 		$scope.getProblem=function(){
@@ -1039,6 +1045,8 @@
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblem($scope.problemId).then(function (response) {
 				$scope.problem=response;
+				$scope.solution.problemTitle=response.title;
+				$scope.solution.problemCreatedBy=response.created_by;
 				dashboardSpinnerService.stopSpinner();
             })
             .catch(function(error){
@@ -1345,7 +1353,7 @@
 		
 
 		function getAcceptedProblems(){
-			var submitProblem=$resource("/problems/acceptedProblem");
+			var submitProblem=$resource("/problems/acceptedProblems");
 			var defered=$q.defer();
 			submitProblem.query(
 		    function(response){
