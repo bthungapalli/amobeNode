@@ -10,6 +10,7 @@
 		$scope.solution={};
 		$scope.itemsPerPage="5";
 		$scope.title="";
+		
 		$scope.getProblems=function(){
 			$scope.errorMessage="";
 			$scope.successMessage="";

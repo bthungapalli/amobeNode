@@ -726,6 +726,19 @@
 		$scope.successMessage="";
 		$scope.editProblem=false;
 		$scope.categories=[];
+		
+		$scope.tinymceOptions = {
+			    inline: false,
+			    plugins: [
+		                    'advlist autolink lists link image charmap print preview anchor',
+		                    'searchreplace visualblocks code fullscreen',
+		                    'insertdatetime media table contextmenu paste code'
+		                ],
+		        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+			    skin: 'lightgray',
+			    theme : 'modern'
+			  };
+		
 		$scope.init=function(){
 			$scope.problem={
 					"title":"",
@@ -824,6 +837,7 @@
 		$scope.solution={};
 		$scope.itemsPerPage="5";
 		$scope.title="";
+		
 		$scope.getProblems=function(){
 			$scope.errorMessage="";
 			$scope.successMessage="";
@@ -1101,6 +1115,19 @@
 		$scope.problemId=$stateParams.problemId;
 		$scope.errorMessage="";
 		$scope.successMessage="";
+		
+		$scope.tinymceOptions = {
+			    inline: false,
+			    plugins: [
+		                    'advlist autolink lists link image charmap print preview anchor',
+		                    'searchreplace visualblocks code fullscreen',
+		                    'insertdatetime media table contextmenu paste code'
+		                ],
+		        toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+			    skin: 'lightgray',
+			    theme : 'modern'
+			  };
+		
 		
 		$scope.solution={
 				"description":"",
