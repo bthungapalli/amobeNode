@@ -156,9 +156,23 @@
 		 
 		 $scope.addCategory=function(){
 			 if($scope.loginDetails.subcategoryList.length>0){
-				 var category=JSON.parse($scope.loginDetails.category1)
+				 var category=JSON.parse($scope.loginDetails.category1);
 				 category.subcategories=$scope.loginDetails.subcategoryList;
-				 $scope.loginDetails.category.push(category);
+				 
+				 var exist=false;
+				 var index=0;
+				 $scope.loginDetails.category.forEach(function(cat,i){
+					 if(cat._id==category._id){
+						 exist=true;
+						 index=i;
+					 }
+				 });
+				 if(exist){
+					 $scope.loginDetails.category[index]=category;
+				 }else{
+					 $scope.loginDetails.category.push(category);
+				 }
+				 
 				 $scope.loginDetails.category1="Select Category";
 			     $scope.loginDetails.subcategoryList=[];
 			 }
