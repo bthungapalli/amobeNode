@@ -1,5 +1,5 @@
 var counterModel = require("../models/counterModel");
-var problemModel=require("../models/commentModel");
+var commentModel=require("../models/commentModel");
 var commentService =function(){
 
 return{
@@ -55,7 +55,7 @@ return{
 				 });
       },
 	 getCommentsForProblemId:function(id,callbackForGetCommentsForProblemId){
-		 var query =commentModel.findOne({"problemId":id});
+		 var query =commentModel.find({"problemId":id});
 		 this.execute(query,callbackForGetCommentsForProblemId);
 	 }
 

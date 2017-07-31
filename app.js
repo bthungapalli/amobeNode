@@ -15,6 +15,7 @@ var userManagementRoute = require('./routes/userManagementRoute');
 var categoriesRoute = require('./routes/categoriesRoute');
 var problemsRoute = require('./routes/problemsRoute');
 var forgotPasswordRoute = require('./routes/forgotPasswordRoute');
+var commentRoute = require('./routes/commentRoute');
 
 
 
@@ -82,6 +83,7 @@ app.use('/userManagement', userManagementRoute);
 app.use('/categories', categoriesRoute);
 app.use('/problems', problemsRoute);
 app.use('/forgotPassword', forgotPasswordRoute);
+app.use('/comments', commentRoute);
 app.use('/amoeba/**', mainRoute);
 
 

@@ -109,6 +109,39 @@
             });
 		};
 		
+		$scope.getComments=function(problem){
+			$scope.errorMessage="";
+			$scope.successMessage="";
+			dashboardSpinnerService.startSpinner();
+			problemsFactory.getComments(problem._id).then(function (response) {
+				problem.comments=response;
+				dashboardSpinnerService.stopSpinner();
+            })
+            .catch(function(error){
+        		$scope.errorMessage="Some thing went wrong";
+            	dashboardSpinnerService.stopSpinner();
+            });
+		}
+		
+		$scope.addComment=function(problem){
+			
+			if(problem.comment!==undefined){
+				$scope.errorMessage="";
+				$scope.successMessage="";
+				dashboardSpinnerService.startSpinner();
+				problemsFactory.addComment(problem).then(function (response) {
+					problem.comment="";
+					problem.comments.push(response);
+					dashboardSpinnerService.stopSpinner();
+	            })
+	            .catch(function(error){
+	        		$scope.errorMessage="Some thing went wrong";
+	            	dashboardSpinnerService.stopSpinner();
+	            });
+			}
+			
+		}
+		
 		$scope.submitSolution=function(problem){
 			$state.go('dashboard.solution', {"problemId": problem._id})
 		}

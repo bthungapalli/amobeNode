@@ -936,6 +936,39 @@
             });
 		};
 		
+		$scope.getComments=function(problem){
+			$scope.errorMessage="";
+			$scope.successMessage="";
+			dashboardSpinnerService.startSpinner();
+			problemsFactory.getComments(problem._id).then(function (response) {
+				problem.comments=response;
+				dashboardSpinnerService.stopSpinner();
+            })
+            .catch(function(error){
+        		$scope.errorMessage="Some thing went wrong";
+            	dashboardSpinnerService.stopSpinner();
+            });
+		}
+		
+		$scope.addComment=function(problem){
+			
+			if(problem.comment!==undefined){
+				$scope.errorMessage="";
+				$scope.successMessage="";
+				dashboardSpinnerService.startSpinner();
+				problemsFactory.addComment(problem).then(function (response) {
+					problem.comment="";
+					problem.comments.push(response);
+					dashboardSpinnerService.stopSpinner();
+	            })
+	            .catch(function(error){
+	        		$scope.errorMessage="Some thing went wrong";
+	            	dashboardSpinnerService.stopSpinner();
+	            });
+			}
+			
+		}
+		
 		$scope.submitSolution=function(problem){
 			$state.go('dashboard.solution', {"problemId": problem._id})
 		}
@@ -1527,6 +1560,31 @@
 			return defered.promise;
 		};
 		
+		function getComments(problemId){
+			var submitProblem=$resource("/comments/"+problemId);
+			var defered=$q.defer();
+			submitProblem.query(
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
+		function addComment(problem){
+			var payload =  {"comment":problem.comment,"problemId":problem._id};
+			var submitProblem=$resource("/comments");
+			var defered=$q.defer();
+			submitProblem.save(payload,
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
 		return {
 			submitProblem:submitProblem,
 			getProblems:getProblems,
@@ -1537,7 +1595,9 @@
 			submitSolution:submitSolution,
 			getSolutionByProblemId:getSolutionByProblemId,
 			getBlockedAcceptedProblems:getBlockedAcceptedProblems,
-			saveNewConsultant:saveNewConsultant
+			saveNewConsultant:saveNewConsultant,
+			getComments:getComments,
+			addComment:addComment
 		};
 	};
 	

@@ -1,63 +1,96 @@
 <div class="col-xs-12">
 
-<h3>{{title}} Problems</h3>
-<hr style="margin-top: 0px;margin-bottom: 15px;border-top: 2.5px solid #1abb9c;">
- 
-<div class="col-xs-4">
+	<h3>{{title}} Problems</h3>
+	<hr
+		style="margin-top: 0px; margin-bottom: 15px; border-top: 2.5px solid #1abb9c;">
+
+	<div class="col-xs-4">
 
 
-			 <div class="form-group">
-    <label for="exampleInputPassword1">Problems Per Page</label>
-    <select class="form-control" ng-model="itemsPerPage">
-					 <option  value="5">5</option>
-			  <option value="10">10</option>
-			  <option value="25">25</option>
-			  <option value="50">50</option>
-					</select>
-  </div>		
-					
+		<div class="form-group">
+			<label for="exampleInputPassword1">Problems Per Page</label> <select
+				class="form-control" ng-model="itemsPerPage">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="25">25</option>
+				<option value="50">50</option>
+			</select>
+		</div>
+
 	</div>
-	
-		<div class="col-xs-8">
-			 <div class="form-group">
-    <label for="exampleInputPassword1">Search</label>
-    <input type="text" class="form-control" id="exampleInputPassword1"  ng-model="search" placeholder="Search">
-  </div>
+
+	<div class="col-xs-8">
+		<div class="form-group">
+			<label for="exampleInputPassword1">Search</label> <input type="text"
+				class="form-control" id="exampleInputPassword1" ng-model="search"
+				placeholder="Search">
+		</div>
+	</div>
+
+	<div class="col-xs-12" ng-if="errorMessage">
+		<label class="text-danger">{{errorMessage}}</label>
+	</div>
+	<div class="col-xs-12" ng-if="successMessage">
+		<label class="text-success">{{successMessage}}</label>
+	</div>
+
+	<div class="col-xs-12"
+		dir-paginate="problem in problems |filter:search|itemsPerPage:itemsPerPage"
+		style="margin-bottom: 5px; cursor: pointer;">
+		<div class="col-xs-12" style="background-color: #c8e1c1;"
+			ng-click="problem.show=!problem.show;solutionObj(problem);getComments(problem);">
+			<h3 style="margin-top: 5px; margin-bottom: 5px;">
+				{{problem.title}} <span ng-if="problem.status==='DRAFT'"
+					class="label label-primary" style="float: right">Draft</span> <span
+					class="label label-success" style="float: right">{{problem.category}}
+					{{problem.subcategory}}</span>
+
+			</h3>
+
+			<p style="margin-bottom: 0px;">
+				{{problem.anonymous?'':problem.username}} <span
+					class="glyphicon glyphicon-calendar" style="color: #40c15d"></span>{{problem.created_at
+				| date:'dd MMM yyyy'}}
+			</p>
+		</div>
+		<div class="col-xs-12" style="border: 1px solid #00b3ac;" ng-if="problem.show">
+			<lablel>Summary: </lablel>
+			<p>{{problem.summary}}</p>
+			<lablel>Description: </lablel>
+			<p ng-bind-html="problem.description | toTrustHtml"></p>
+
+			<div ng-if="problem.solution.description">
+				<lablel>Solution By {{problem.solution.username}} </lablel>
+				<p ng-bind-html="problem.solution.description | toTrustHtml"></p>
 			</div>
 			
-	<div class="col-xs-12" ng-if="errorMessage"><label class="text-danger">{{errorMessage}}</label></div>
-  <div class="col-xs-12" ng-if="successMessage"><label class="text-success">{{successMessage}}</label></div>		
+			<div class="col-xs-12">
+      			<div class="form-group">
+        		<textarea class="form-control" rows="3" ng-model="problem.comment" placeholder="Summary" required></textarea>
+      			<button type="button" ng-click="addComment(problem);" class="btn btn-primary">comment</button>
+      			</div>
+    		</div>
+    		
+    		
+    		<div class="col-xs-12">
+    		<p ng-repeat="comment in problem.comments">{{comment.comment}}</p>
+    		</div>
+    		
 			
-	<div class="col-xs-12" dir-paginate="problem in problems |filter:search|itemsPerPage:itemsPerPage" style="margin-bottom: 5px;cursor: pointer;">
-	<div class="col-xs-12" style="background-color: #c8e1c1;" ng-click="problem.show=!problem.show;solutionObj(problem);">
-	<h3 style="margin-top: 5px;margin-bottom: 5px;">{{problem.title}} 
-	<span ng-if="problem.status==='DRAFT'" class="label label-primary" style="float: right">Draft</span>
-	<span  class="label label-success" style="float: right">{{problem.category}} {{problem.subcategory}}</span>
-	
-	</h3>
+			
+			<div class="col-xs-12 text-center">
+				<button type="button" ng-if="acceptedProblems"
+					ng-click="submitSolution(problem);" class="btn btn-success">Solution</button>
+				<button type="button" ng-if="myProblems"
+					ng-click="editProblem(problem);" class="btn btn-primary">Edit</button>
+				<button type="button" ng-if="allProblems"
+					ng-click="acceptProblem(problem,$index);" class="btn btn-primary">Accept</button>
+			</div>
+		</div>
 
-	<p style="margin-bottom: 0px;">{{problem.anonymous?'':problem.username}}  <span class="glyphicon glyphicon-calendar" style="color:#40c15d"></span>{{problem.created_at | date:'dd MMM yyyy'}}</p>
 	</div>
-	<div class="col-xs-12"  style="border:1px solid #00b3ac;" ng-if="problem.show">
-	<lablel>Summary: </lablel>
-	<p>{{problem.summary}}</p>
-	<lablel>Description: </lablel>
-	<p ng-bind-html="problem.description | toTrustHtml"></p>
-	
-	
-	<div ng-if="problem.solution.description">
-	<lablel>Solution By {{problem.solution.username}} </lablel>
-	<p ng-bind-html="problem.solution.description | toTrustHtml"></p>
-	</div>
-	 <div class="col-xs-12 text-center" >
-	 <button type="button" ng-if="acceptedProblems" ng-click="submitSolution(problem);" class="btn btn-success">Solution</button>
-      <button type="button" ng-if="myProblems" ng-click="editProblem(problem);" class="btn btn-primary">Edit</button>
-      <button type="button" ng-if="allProblems" ng-click="acceptProblem(problem,$index);" class="btn btn-primary">Accept</button>
-    </div>
-	</div>
-	
-	</div>		
-	
-	<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true" ></dir-pagination-controls>
-			
+
+	<dir-pagination-controls max-size="5" direction-links="true"
+		boundary-links="true"></dir-pagination-controls>
+
 </div>

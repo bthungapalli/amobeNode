@@ -127,6 +127,31 @@
 			return defered.promise;
 		};
 		
+		function getComments(problemId){
+			var submitProblem=$resource("/comments/"+problemId);
+			var defered=$q.defer();
+			submitProblem.query(
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
+		function addComment(problem){
+			var payload =  {"comment":problem.comment,"problemId":problem._id};
+			var submitProblem=$resource("/comments");
+			var defered=$q.defer();
+			submitProblem.save(payload,
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
 		return {
 			submitProblem:submitProblem,
 			getProblems:getProblems,
@@ -137,7 +162,9 @@
 			submitSolution:submitSolution,
 			getSolutionByProblemId:getSolutionByProblemId,
 			getBlockedAcceptedProblems:getBlockedAcceptedProblems,
-			saveNewConsultant:saveNewConsultant
+			saveNewConsultant:saveNewConsultant,
+			getComments:getComments,
+			addComment:addComment
 		};
 	};
 	
