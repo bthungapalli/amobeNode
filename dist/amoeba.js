@@ -1058,6 +1058,7 @@
 		$scope.getBlockedAcceptedProblems();
 		
 		$scope.getUsersForProblem=function(problem){
+			$scope.newConsultant="Select Consultant";
 			$scope.errorMessage="";
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
@@ -1076,6 +1077,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.saveNewConsultant($scope.newConsultant,problem._id).then(function (response) {
+				$scope.newConsultant="Select Consultant";
 				$scope.getBlockedAcceptedProblems();
 				dashboardSpinnerService.stopSpinner();
             })
