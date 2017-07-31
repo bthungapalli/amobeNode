@@ -981,7 +981,6 @@
 					 $scope.userDetails.category.push(category);
 				 }
 				 $scope.editCategoryName="";
-				 //$scope.loginDetails.category.push(category);
 				 $scope.loginDetails.category1="Select Category";
 			     $scope.loginDetails.subcategoryList=[];
 			 }
