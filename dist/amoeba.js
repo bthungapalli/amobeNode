@@ -1720,7 +1720,7 @@ angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($
 			var updateProfileResource=$resource(DASHBOARD_CONSTANTS.PROFILE_UPDATE_URL);
 			var defered=$q.defer();
 			var payload =  {"_id":profileDetails._id,"city":profileDetails.city,"state":profileDetails.state,
-					"country":profileDetails.country,
+					"country":profileDetails.country,"firstName": profileDetails.firstName,"lastName": profileDetails.lastName,
 					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address
 					,"zipcode":profileDetails.zipcode,"age":profileDetails.age,"height":profileDetails.height,
 					"weight":profileDetails.weight,"category":profileDetails.category};
