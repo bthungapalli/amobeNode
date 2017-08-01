@@ -14,10 +14,10 @@
          
        
           <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu"> <a href="" class="dropdown-toggle" data-toggle="dropdown"> <img ng-src="data:image/png;base64,{{userDetails.userImagePath}}" ng-if="userDetails.userImagePath"  class="user-image" alt="User Image"> <img src="images/default.png" class="user-image" ng-if="!userDetails.userImagePath" alt="User Image"> <span class="hidden-xs">{{userDetails.name}}</span> </a>
+          <li class="dropdown user user-menu"> <a href="" class="dropdown-toggle" data-toggle="dropdown"> <img ng-src="{{userDetails.userImagePath}}" ng-if="userDetails.userImagePath"  class="user-image" alt="User Image"> <img src="images/default.png" class="user-image" ng-if="!userDetails.userImagePath" alt="User Image"> <span class="hidden-xs">{{userDetails.name}}</span> </a>
             <ul class="dropdown-menu">
               <!-- User image -->
-              <li class="user-header"> <img ng-src="data:image/png;base64,{{userDetails.userImagePath}}" ng-if="userDetails.userImagePath"  class="img-circle" alt="User Image"> <img src="images/default.png" class="img-circle" ng-if="!userDetails.userImagePath" alt="User Image">
+              <li class="user-header"> <img ng-src="{{userDetails.userImagePath}}" ng-if="userDetails.userImagePath"  class="img-circle" alt="User Image"> <img src="images/default.png" class="img-circle" ng-if="!userDetails.userImagePath" alt="User Image">
                 <p> PROFILE <!-- <small>Member since Nov. 2012</small>  --></p>
               </li>
               <!-- Menu Body -->

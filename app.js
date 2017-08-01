@@ -60,7 +60,7 @@ app.engine('html', require('ejs').renderFile);
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-    extended: false
+    extended: true
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -71,6 +71,7 @@ app.use("/css",express.static(path.resolve(__dirname, './css')));
 app.use("/images",express.static(path.resolve(__dirname, './images')));
 app.use("/img",express.static(path.resolve(__dirname, './img')));
 app.use("/js",express.static(path.resolve(__dirname, './js')));
+app.use("/profiles",express.static(path.resolve(__dirname, './profiles')));
 app.use("/node_modules",express.static(path.resolve(__dirname, './node_modules')));
 app.use("/bower_components",express.static(path.resolve(__dirname, './bower_components')));
 app.use("/public",express.static(path.resolve(__dirname, './public')));

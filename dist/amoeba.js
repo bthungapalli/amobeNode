@@ -1063,9 +1063,24 @@
 		$scope.updateProfile=function(){
 			dashboardSpinnerService.startSpinner();
 			profileFactory.updateProfile($scope.userDetails).then(function (response) {
-				$scope.editProfile=!$scope.editProfile;
-				$rootScope.$broadcast('profile-update', response);
-				dashboardSpinnerService.stopSpinner();
+				
+				if($scope.userDetails.uploadImage){
+					
+					profileFactory.uploadFile($scope.userDetails).then(function (response) {
+						$scope.editProfile=!$scope.editProfile;
+						$scope.userDetails.userImagePath=response.path;
+						$rootScope.$broadcast('profile-update', $scope.userDetails);
+						dashboardSpinnerService.stopSpinner();
+					}).catch(function(error){
+		            	dashboardSpinnerService.stopSpinner();
+		            });
+					
+				}else{
+					$scope.editProfile=!$scope.editProfile;
+					$rootScope.$broadcast('profile-update', $scope.userDetails);
+					dashboardSpinnerService.stopSpinner();
+				}
+				
             })
             .catch(function(error){
             	dashboardSpinnerService.stopSpinner();
@@ -1268,6 +1283,23 @@
 	});
 })();
 
+
+
+angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($parse) {
+		return {
+		    restrict: 'A',
+		    link: function(scope, element, attrs) {
+		        var model = $parse(attrs.fileModel);
+		        var modelSetter = model.assign;
+
+		        element.bind('change', function(){
+		            scope.$apply(function(){
+		                modelSetter(scope, element[0].files[0]);
+		            });
+		        });
+		    }
+		};
+}]);
 
 
 (function(){
@@ -1624,7 +1656,7 @@
 			var updateProfileResource=$resource(DASHBOARD_CONSTANTS.PROFILE_UPDATE_URL);
 			var defered=$q.defer();
 			var payload =  {"_id":profileDetails._id,"city":profileDetails.city,"state":profileDetails.state,
-					"country":profileDetails.country,"zipcode":profileDetails.zipcode,
+					"country":profileDetails.country,
 					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address
 					,"zipcode":profileDetails.zipcode,"age":profileDetails.age,"height":profileDetails.height,
 					"weight":profileDetails.weight,"category":profileDetails.category};
@@ -1636,7 +1668,31 @@
 				});
 				return defered.promise;
 			};
-		
+			
+			function uploadFile(profileDetails){
+				var defered=$q.defer();
+				 var payload = new FormData();
+				 
+				 payload.append('uploadImage', profileDetails.uploadImage);
+	            
+				 $.ajax({
+						type : 'POST',
+						url : '/profile/fileUpload',
+						data : payload,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+							 defered.resolve(response);
+						},
+						error : function(xhr, status) {
+							 defered.reject("error");
+						}
+			
+					});
+				return defered.promise;
+			};	
+			
+			
 		function updatePassword(password){
 			var updatePasswordResource=$resource(DASHBOARD_CONSTANTS.CHANGE_PASSWORD_URL);
 			var defered=$q.defer();
@@ -1652,7 +1708,8 @@
 		
 		return {
 			updateProfile:updateProfile,
-			updatePassword:updatePassword
+			updatePassword:updatePassword,
+			uploadFile:uploadFile
 		};
 	};
 	

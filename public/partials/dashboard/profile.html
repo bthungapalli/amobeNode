@@ -5,13 +5,11 @@
 <div class="col-sm-3 col-xs-12">
 
 <img src="images/default.png" class="user-image" alt="User Image" ng-if="!userDetails.userImagePath">
-<img class="user-image profileDimensions"  ng-src="data:image/png;base64,{{userDetails.userImagePath}}" ng-if="userDetails.userImagePath" />
+<img class="user-image img-responsive"   ng-src="{{userDetails.userImagePath}}" ng-if="userDetails.userImagePath" />
 
-  <input class="white" type="file" file-model="userDetails.uploadImage" ng-hide="!editProfile"/>
+  <input class="white" type="file" name="uploadImage" file-model="userDetails.uploadImage" ng-hide="!editProfile"/>
   <br>
      <br>
-<!--    <button ng-if="userDetails.isAdmin===0" ng-click="openUnsubscribeModal();" type="button" class="btn btn-danger"> <span class="label label-danger">UNSUBSCRIBE COMMODITY</span> </button>
- -->   <button ng-if="userDetails.isAdmin===0" ng-click="editCommodities();" type="button" class="btn btn-danger"> <span class="label label-danger">EDIT COMMODITIES</span> </button>
 
 
 </div>

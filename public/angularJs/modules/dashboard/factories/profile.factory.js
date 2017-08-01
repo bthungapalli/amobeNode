@@ -8,7 +8,7 @@
 			var updateProfileResource=$resource(DASHBOARD_CONSTANTS.PROFILE_UPDATE_URL);
 			var defered=$q.defer();
 			var payload =  {"_id":profileDetails._id,"city":profileDetails.city,"state":profileDetails.state,
-					"country":profileDetails.country,"zipcode":profileDetails.zipcode,
+					"country":profileDetails.country,
 					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address
 					,"zipcode":profileDetails.zipcode,"age":profileDetails.age,"height":profileDetails.height,
 					"weight":profileDetails.weight,"category":profileDetails.category};
@@ -20,7 +20,31 @@
 				});
 				return defered.promise;
 			};
-		
+			
+			function uploadFile(profileDetails){
+				var defered=$q.defer();
+				 var payload = new FormData();
+				 
+				 payload.append('uploadImage', profileDetails.uploadImage);
+	            
+				 $.ajax({
+						type : 'POST',
+						url : '/profile/fileUpload',
+						data : payload,
+						contentType : false,
+						processData : false,
+						success : function(response) {
+							 defered.resolve(response);
+						},
+						error : function(xhr, status) {
+							 defered.reject("error");
+						}
+			
+					});
+				return defered.promise;
+			};	
+			
+			
 		function updatePassword(password){
 			var updatePasswordResource=$resource(DASHBOARD_CONSTANTS.CHANGE_PASSWORD_URL);
 			var defered=$q.defer();
@@ -36,7 +60,8 @@
 		
 		return {
 			updateProfile:updateProfile,
-			updatePassword:updatePassword
+			updatePassword:updatePassword,
+			uploadFile:uploadFile
 		};
 	};
 	

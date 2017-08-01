@@ -29,8 +29,9 @@
    "context":{
 	   	"path":"http://localhost:3000/images/logo.png"
   },
-   "recall":{
-	   "filesPath":"/Users/apatha/Desktop/uploads/"
+   "amoeba":{
+	   "filesPath":"/Users/apatha/Desktop/uploads/",
+	   "profilePath":"./profiles/"
    }
 
 }

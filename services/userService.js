@@ -84,6 +84,11 @@ return{
                         ,"email":{$nin: accepted_by} };
 		 var query = userModel.find(condition); 
 		 this.execute(query,callbackForGetUsersForProblem);
+	 },
+	 updateImagePath:function(fileName,id,callbackForUpdateImagePath){
+		 var conditions = { "_id":id };
+		 var update = { $set: {"userImagePath":fileName,"updated_at":new Date()}};
+		 this.update({},conditions,update,callbackForUpdateImagePath);
 	 }
 
 }

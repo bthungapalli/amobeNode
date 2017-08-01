@@ -76,9 +76,24 @@
 		$scope.updateProfile=function(){
 			dashboardSpinnerService.startSpinner();
 			profileFactory.updateProfile($scope.userDetails).then(function (response) {
-				$scope.editProfile=!$scope.editProfile;
-				$rootScope.$broadcast('profile-update', response);
-				dashboardSpinnerService.stopSpinner();
+				
+				if($scope.userDetails.uploadImage){
+					
+					profileFactory.uploadFile($scope.userDetails).then(function (response) {
+						$scope.editProfile=!$scope.editProfile;
+						$scope.userDetails.userImagePath=response.path;
+						$rootScope.$broadcast('profile-update', $scope.userDetails);
+						dashboardSpinnerService.stopSpinner();
+					}).catch(function(error){
+		            	dashboardSpinnerService.stopSpinner();
+		            });
+					
+				}else{
+					$scope.editProfile=!$scope.editProfile;
+					$rootScope.$broadcast('profile-update', $scope.userDetails);
+					dashboardSpinnerService.stopSpinner();
+				}
+				
             })
             .catch(function(error){
             	dashboardSpinnerService.stopSpinner();
