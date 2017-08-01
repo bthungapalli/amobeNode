@@ -22,6 +22,7 @@ var ProblemSchema = new Schema({
     anonymous  :{type:Boolean,required: true,default: false},
     username:{type: String, required: true},
     accepted:{type: Boolean, required: false,default: false},
+    filePath:{type:Array,required:false},
     accepted_by:{type: String, required: false},
     accepted_at:{type: Date, required: false},
     created_by:{type: String, required: true},

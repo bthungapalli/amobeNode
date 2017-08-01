@@ -89,7 +89,7 @@ return{
 			 }else{
 				 var conditions = { "_id":problem._id };
 				 var update = { $set: {"status":problem.status,"description": problem.description,
-						"summary": problem.summary,"anonymous":problem.anonymous,
+						"summary": problem.summary,"anonymous":problem.anonymous,"filePath":problem.filePath,
 					 "updated_at":new Date()}};
 				 this.update(problem,conditions,update,callbackForCreateOrUpdateProblem);
 			 }

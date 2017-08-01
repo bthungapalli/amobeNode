@@ -152,6 +152,31 @@
 			return defered.promise;
 		};
 		
+		function fileUpload(file){
+			var defered=$q.defer();
+			 var payload = new FormData();
+			 
+			 payload.append('uploadFile', file);
+           
+			 $.ajax({
+					type : 'POST',
+					url : '/problems/fileUpload',
+					data : payload,
+					contentType : false,
+					processData : false,
+					success : function(response) {
+						 defered.resolve(response);
+					},
+					error : function(xhr, status) {
+						 defered.reject("error");
+					}
+		
+				});
+			return defered.promise;
+		};
+		
+		
+		
 		return {
 			submitProblem:submitProblem,
 			getProblems:getProblems,
@@ -164,7 +189,8 @@
 			getBlockedAcceptedProblems:getBlockedAcceptedProblems,
 			saveNewConsultant:saveNewConsultant,
 			getComments:getComments,
-			addComment:addComment
+			addComment:addComment,
+			fileUpload:fileUpload
 		};
 	};
 	

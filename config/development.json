@@ -30,7 +30,7 @@
 	   	"path":"http://localhost:9000/images/logo.png"
   },
    "amoeba":{
-	   "filesPath":"/opt/amoeba/uploads/",
+	   "filesPath":"/Users/apatha/Desktop/uploads/",
 	   "profilePath":"./profiles/"
    }
 

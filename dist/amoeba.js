@@ -807,15 +807,59 @@
 			$scope.errorMessage="";
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
+			
 			problemsFactory.submitProblem($scope.problem).then(function (response) {
-				$scope.init();
-				$state.go("dashboard.myProblems");
-				dashboardSpinnerService.stopSpinner();
+				
+				if($scope.problem.file){
+					var problem=response;
+					
+					$scope.index=0;
+					
+					for(var i=0; i<$scope.problem.file.length;i++){
+						
+						problemsFactory.fileUpload($scope.problem.file[i]).then(function (response) {
+							debugger;
+							problem.filePath.push(response.filename);
+							$scope.index=$scope.index+1;
+							 if($scope.problem.file.length==$scope.index){
+								 
+								 problemsFactory.submitProblem(problem).then(function (response) {
+									  $scope.init();
+										$state.go("dashboard.myProblems");
+										dashboardSpinnerService.stopSpinner();
+						            })
+						            .catch(function(error){
+						        		$scope.errorMessage="Some thing went wrong";
+						            	dashboardSpinnerService.stopSpinner();
+						            });
+							  }
+							
+						}).catch(function(error){
+			        		$scope.errorMessage="Some thing went wrong";
+			            	dashboardSpinnerService.stopSpinner();
+			            });
+						
+					}	
+						
+						
+					
+				}else{
+					$scope.init();
+					$state.go("dashboard.myProblems");
+					dashboardSpinnerService.stopSpinner();
+				}
+				
+				
             })
             .catch(function(error){
         		$scope.errorMessage="Some thing went wrong";
             	dashboardSpinnerService.stopSpinner();
             });
+			
+			
+			
+			
+			
 		};
 	};
 	
@@ -1623,6 +1667,31 @@ angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($
 			return defered.promise;
 		};
 		
+		function fileUpload(file){
+			var defered=$q.defer();
+			 var payload = new FormData();
+			 
+			 payload.append('uploadFile', file);
+           
+			 $.ajax({
+					type : 'POST',
+					url : '/problems/fileUpload',
+					data : payload,
+					contentType : false,
+					processData : false,
+					success : function(response) {
+						 defered.resolve(response);
+					},
+					error : function(xhr, status) {
+						 defered.reject("error");
+					}
+		
+				});
+			return defered.promise;
+		};
+		
+		
+		
 		return {
 			submitProblem:submitProblem,
 			getProblems:getProblems,
@@ -1635,7 +1704,8 @@ angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($
 			getBlockedAcceptedProblems:getBlockedAcceptedProblems,
 			saveNewConsultant:saveNewConsultant,
 			getComments:getComments,
-			addComment:addComment
+			addComment:addComment,
+			fileUpload:fileUpload
 		};
 	};
 	

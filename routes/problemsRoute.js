@@ -6,6 +6,32 @@ var userService=require("../services/userService");
 var nconf = require('nconf');
 var mailUtil=require("../utils/MailUtil");
 var multer = require('multer');
+var nconf = require('nconf');
+
+var storage =   multer.diskStorage({
+	  destination: function (req, file, callback) {
+	    callback(null, nconf.get("amoeba").filesPath);
+	  },
+	  filename: function (req, file, callback) {
+		  var datetimestamp = Date.now();
+	    callback(null, file.fieldname + '-' + file.originalname.split('.')[0] + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
+	  }
+	});
+
+	var upload = multer({ storage : storage}).single('uploadFile');
+	
+	
+
+	router.post('/fileUpload',checkSession.requireLogin,function (req,res,next){
+		upload(req,res,function(err){
+		        if(err){
+		             res.json({error_code:1,err_desc:err});
+		        }
+		        
+		        res.json(req.file);		        
+		    });
+			
+	});	
 
 router.get('/allProblems',checkSession.requireLogin,function (req,res,next){
 	  var user=req.session.user;
@@ -28,6 +54,8 @@ router.get('/myProblems',checkSession.requireLogin,function (req,res,next){
 router.post('/acceptProblem',checkSession.requireLogin,function (req,res,next){
 	var problem = req.body;
 	var user=req.session.user;
+	
+	
 		problemsService.acceptProblem(user,problem,function(err,responseproblem){
 			if(err)
     		res.send("error");
@@ -55,7 +83,6 @@ router.post('/acceptProblem',checkSession.requireLogin,function (req,res,next){
 router.post('/createProblem',checkSession.requireLogin,function (req,res,next){
 		var problem = req.body;
 		var user=req.session.user;
-		
 			problemsService.getProblemById(problem._id,function(err,presentProblem){
 				
 				if(err)
@@ -119,31 +146,6 @@ router.post('/solution',checkSession.requireLogin,function (req,res,next){
 	});
 });
 
-
-
-
-var storage =   multer.diskStorage({
-	  destination: function (req, file, callback) {
-	    callback(null, nconf.get("recall").filesPath);
-	  },
-	  filename: function (req, file, callback) {
-		  var datetimestamp = Date.now();
-	    callback(null, file.fieldname + '-' + file.originalname.split('.')[0] + '.' + file.originalname.split('.')[file.originalname.split('.').length -1]);
-	  }
-	});
-
-	var upload = multer({ storage : storage}).single('file');
-
-
-router.post('/fileUpload',checkSession.requireLogin,function (req,res,next){
-	upload(req,res,function(err){
-        if(err){
-             res.json({error_code:1,err_desc:err});
-             return;
-        }
-         res.json(req.file);
-    });
-});
 
 router.post('/filterRecalls',checkSession.requireLogin,function (req,res,next){
 		var recallFilter = req.body;
