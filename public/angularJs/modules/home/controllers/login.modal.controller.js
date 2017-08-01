@@ -120,7 +120,7 @@
 	    		 $loading.start('login');
 					loginFactory.register($scope.loginDetails)
 					.then(function (response) {
-						$scope.loginMessageDetails.successMessage.login=response.success;
+						$scope.loginMessageDetails.successMessage.register="Successfully Registered";
 						$scope.initializeLoginDetails();
 						$loading.finish('login');
 		            })
