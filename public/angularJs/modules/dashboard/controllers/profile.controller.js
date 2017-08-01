@@ -75,6 +75,10 @@
 	     
 		$scope.updateProfile=function(){
 			dashboardSpinnerService.startSpinner();
+			
+			if($scope.userDetails.uploadImage){
+				$scope.userDetails.uploadImage=$scope.userDetails.uploadImage[0];
+			}
 			profileFactory.updateProfile($scope.userDetails).then(function (response) {
 				
 				if($scope.userDetails.uploadImage){
@@ -94,8 +98,7 @@
 					dashboardSpinnerService.stopSpinner();
 				}
 				
-            })
-            .catch(function(error){
+            }).catch(function(error){
             	dashboardSpinnerService.stopSpinner();
             });
 		};
