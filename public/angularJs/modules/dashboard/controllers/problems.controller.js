@@ -96,20 +96,23 @@
 		
 		
 		$scope.solutionObj=function(problem){
-			$scope.errorMessage="";
-			$scope.successMessage="";
-			dashboardSpinnerService.startSpinner();
-			problemsFactory.getSolutionByProblemId(problem._id).then(function (response) {
-				problem.solution=response;
-				dashboardSpinnerService.stopSpinner();
-            })
-            .catch(function(error){
-        		$scope.errorMessage="Some thing went wrong";
-            	dashboardSpinnerService.stopSpinner();
-            });
+			if(problem.status=='SAVE'){
+				$scope.errorMessage="";
+				$scope.successMessage="";
+				dashboardSpinnerService.startSpinner();
+				problemsFactory.getSolutionByProblemId(problem._id).then(function (response) {
+					problem.solution=response;
+					dashboardSpinnerService.stopSpinner();
+	            })
+	            .catch(function(error){
+	        		$scope.errorMessage="Some thing went wrong";
+	            	dashboardSpinnerService.stopSpinner();
+	            });
+			}
 		};
 		
 		$scope.getComments=function(problem){
+			
 			$scope.errorMessage="";
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();

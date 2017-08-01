@@ -34,15 +34,13 @@
 		<label class="text-success">{{successMessage}}</label>
 	</div>
 
-	<div class="col-xs-12"
-		dir-paginate="problem in problems |filter:search|itemsPerPage:itemsPerPage"
-		style="margin-bottom: 5px; cursor: pointer;">
+	<div class="col-xs-12" dir-paginate="problem in problems |filter:search|itemsPerPage:itemsPerPage" style="margin-bottom: 5px; cursor: pointer;">
 		<div class="col-xs-12" style="background-color: #c8e1c1;"
 			ng-click="problem.show=!problem.show;solutionObj(problem);getComments(problem);">
 			<h3 style="margin-top: 5px; margin-bottom: 5px;">
 				{{problem.title}} <span ng-if="problem.status==='DRAFT'"
-					class="label label-primary" style="float: right">Draft</span> <span
-					class="label label-success" style="float: right">{{problem.category}}
+					class="label label-primary" style="float: right;font-size: medium;">Draft</span> <span
+					class="label label-success" style="float: right;font-size: medium;">{{problem.category}}
 					{{problem.subcategory}}</span>
 
 			</h3>
@@ -54,31 +52,26 @@
 			</p>
 		</div>
 		<div class="col-xs-12" style="border: 1px solid #00b3ac;" ng-if="problem.show">
-			<lablel>Summary: </lablel>
+			<label>Summary: </label>
 			<p>{{problem.summary}}</p>
-			<lablel>Description: </lablel>
+			<label>Description: </label>
 			<p ng-bind-html="problem.description | toTrustHtml"></p>
 
-			<div ng-if="problem.solution.description">
-				<lablel>Solution By {{problem.solution.username}} </lablel>
-				<p ng-bind-html="problem.solution.description | toTrustHtml"></p>
+
+			<div ng-if="problem.solution.username">
+			<label>Solution:</label>
+			
+			<div class="panel panel-default">
+			  <div class="panel-heading">
+			    <label>{{problem.solution.username}}</label> posted solution on  <label>{{problem.created_at | date:'dd MMM yyyy'}}</label>
+			  </div>
+			  <div class="panel-body">
+			          <p ng-bind-html="problem.solution.description | toTrustHtml"></p>    
+			  </div>
 			</div>
-			
-			<div class="col-xs-12">
-      			<div class="form-group">
-        		<textarea class="form-control" rows="3" ng-model="problem.comment" placeholder="Summary" required></textarea>
-      			<button type="button" ng-click="addComment(problem);" class="btn btn-primary">comment</button>
-      			</div>
-    		</div>
-    		
-    		
-    		<div class="col-xs-12">
-    		<p ng-repeat="comment in problem.comments">{{comment.comment}}</p>
-    		</div>
-    		
-			
-			
-			<div class="col-xs-12 text-center">
+			</div>
+
+<div class="col-xs-12 text-center">
 				<button type="button" ng-if="acceptedProblems"
 					ng-click="submitSolution(problem);" class="btn btn-success">Solution</button>
 				<button type="button" ng-if="myProblems"
@@ -86,6 +79,21 @@
 				<button type="button" ng-if="allProblems"
 					ng-click="acceptProblem(problem,$index);" class="btn btn-primary">Accept</button>
 			</div>
+<br>
+<label>Comments:</label>
+           <div class="form-group ">
+        		<textarea class="form-control" rows="2" ng-model="problem.comment" placeholder="Comment" required></textarea>
+      			<button type="button" style="margin-top:3px;" ng-click="addComment(problem);" class="btn btn-sm btn-primary">Add Comment</button>
+      			</div>
+    		
+    		<div class="col-xs-12" ng-repeat="comment in problem.comments">
+    		<label>{{comment.username}}</label> {{comment.created_at | date:'dd MMM yyyy'}}
+    		<p>{{comment.comment}}</p>
+    		</div>
+
+			
+
+			
 		</div>
 
 	</div>
