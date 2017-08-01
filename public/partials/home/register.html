@@ -121,7 +121,7 @@
                 </div>
                 <div class="modal-footer">
                   <div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="registerForm.$invalid || loginDetails.category.length===0">Register</button>
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" ng-disabled="registerForm.$invalid || (loginDetails.role==='Consultant' && loginDetails.category.length===0)">Register</button>
                   </div>
                   <div>
                     <button id="register_login_btn" type="button" class="btn btn-link" ng-click="changeBodyTemplate('partials/home/loginBody.html');">Log In</button>
