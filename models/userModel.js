@@ -24,7 +24,7 @@ var UserSchema = new Schema({
     state: {type: String, required: true},
     zipcode:{type:Number,required:false},
     role:{type:String,required:true},
-    userImagePath:{type:String,required:true},
+    userImagePath:{type:String,required:false},
     age:{type:Number,required:false},
     height:{type:Number,required:false},
     weight:{type:Number,required:false},
