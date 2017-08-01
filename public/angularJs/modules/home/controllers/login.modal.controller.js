@@ -29,6 +29,7 @@
 	 				"age":"",
 	 				"height":"",
 	 				"weight":"",
+	 				"cases":"",
 	 				"category":[],
 	 				"subcategory":"Select SubCategory",
 	 				"subcategoryList":[],

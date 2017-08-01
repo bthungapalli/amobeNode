@@ -9,7 +9,7 @@
 			var defered=$q.defer();
 			var payload =  {"_id":profileDetails._id,"city":profileDetails.city,"state":profileDetails.state,
 					"country":profileDetails.country,"firstName": profileDetails.firstName,"lastName": profileDetails.lastName,
-					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address
+					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address,"cases":profileDetails.cases
 					,"zipcode":profileDetails.zipcode,"age":profileDetails.age,"height":profileDetails.height,
 					"weight":profileDetails.weight,"category":profileDetails.category};
 				updateProfileResource.save(payload,

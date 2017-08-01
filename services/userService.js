@@ -40,14 +40,14 @@ return{
 				 		 callbackForCreateOrUpdateUser(error);
 				 	 }
 				 	 var userCreated = new userModel({"_id":counter.seq,"firstName": user.firstName,"lastName": user.lastName,"password":user.password,
-					"email":user.email,"mobileNumber":user.mobileNumber,"address":user.address,"city":user.city,"state":user.state,"zipcode":user.zipcode,
+					"email":user.email,"mobileNumber":user.mobileNumber,"address":user.address,"city":user.city,"state":user.state,"zipcode":user.zipcode,"cases":user.cases,
 					"gender":user.gender,"role":user.role,"age":user.age,"height":user.height,"weight":user.weight,"category":user.category,"isActive": true,"last_login":new Date()});
 				 	 serviceObj.save(userCreated,callbackForCreateOrUpdateUser);
 				 });
 			 }else{
 				 var conditions = { "_id":user._id };
 				 var update = { $set: {"mobileNumber":user.mobileNumber,"address":user.address,"firstName": user.firstName,"lastName": user.lastName,
-					 			"city":user.city,"state":user.state,"zipcode":user.zipcode,"age":user.age,"height":user.height,
+					 			"city":user.city,"state":user.state,"zipcode":user.zipcode,"age":user.age,"height":user.height,"cases":user.cases,
 					 			"weight":user.weight,"updated_at":new Date()}};
 				 this.update(user,conditions,update,callbackForCreateOrUpdateUser);
 			 }

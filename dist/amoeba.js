@@ -176,6 +176,7 @@
 	 				"age":"",
 	 				"height":"",
 	 				"weight":"",
+	 				"cases":"",
 	 				"category":[],
 	 				"subcategory":"Select SubCategory",
 	 				"subcategoryList":[],
@@ -446,7 +447,7 @@
 			var defered=$q.defer();
 			var payload =  {"email":loginDetails.email,"password":loginDetails.password,"city":loginDetails.city,"state":loginDetails.state,
 							"country":loginDetails.country,"zipcode":loginDetails.zipcode,"firstName":loginDetails.firstName,"lastName":loginDetails.lastName,
-							"gender":loginDetails.gender,"mobileNumber":loginDetails.mobileNumber,"address":loginDetails.address,"role":loginDetails.role
+							"gender":loginDetails.gender,"mobileNumber":loginDetails.mobileNumber,"address":loginDetails.address,"role":loginDetails.role,"cases":loginDetails.cases
 							,"zipcode":loginDetails.zipcode,"age":loginDetails.age,"height":loginDetails.height,"weight":loginDetails.weight,"category":loginDetails.category}
 			registerResource.save(payload,
 		    function(response){
@@ -1721,7 +1722,7 @@ angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($
 			var defered=$q.defer();
 			var payload =  {"_id":profileDetails._id,"city":profileDetails.city,"state":profileDetails.state,
 					"country":profileDetails.country,"firstName": profileDetails.firstName,"lastName": profileDetails.lastName,
-					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address
+					"mobileNumber":profileDetails.mobileNumber,"address":profileDetails.address,"cases":profileDetails.cases
 					,"zipcode":profileDetails.zipcode,"age":profileDetails.age,"height":profileDetails.height,
 					"weight":profileDetails.weight,"category":profileDetails.category};
 				updateProfileResource.save(payload,

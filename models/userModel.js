@@ -30,6 +30,7 @@ var UserSchema = new Schema({
     weight:{type:Number,required:false},
     category:{type:[categorySchema],required:false},
     experience:{type:Number,required:false},
+    cases:{type:Number,required:false},
     isActive:{type:Boolean,required:false},
     last_login: {type: Date,required:false},
     created_at: {type: Date, default: Date.now},

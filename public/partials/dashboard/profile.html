@@ -35,6 +35,10 @@
 					  <input type="radio" ng-disabled="!editProfile"  name="inlineRadioOptions" id="inlineRadio2" ng-model="userDetails.gender" value="Female" required> Female
 					</label>
 				  </div>
+				   <div class="form-group col-xs-6" ng-if="userDetails.role==='Consultant'">
+				    <label for="exampleInputEmail1">No Of Cases</label>
+                   <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number" min="0" placeholder="Cases" ng-model="userDetails.cases" required >
+				  </div>
 				  <div class="form-group col-xs-6">
 				    <label for="exampleInputEmail1">Mobile Number</label>
                    <input id="register_country"  ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="text" placeholder="Number" ng-model="userDetails.mobileNumber" required >
@@ -57,15 +61,15 @@
 				  </div>
 				  <div class="form-group col-xs-6" ng-if="userDetails.role==='User'">
 				    <label for="exampleInputEmail1">Age</label>
-                   <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number" min="0" placeholder="age" ng-model="userDetails.age" required >
+                   <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number" min="0" placeholder="Age" ng-model="userDetails.age" required >
 				  </div>
 				  <div class="form-group col-xs-6" ng-if="userDetails.role==='User'">
 				    <label for="exampleInputPassword1">Height</label>
-                   <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number" min="0" placeholder="height" ng-model="userDetails.height" required >
+                   <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number" min="0" placeholder="Height" ng-model="userDetails.height" required >
 				  </div>
 				  <div class="form-group col-xs-6" ng-if="userDetails.role==='User'">
 				    <label for="exampleInputPassword1">Weight</label>
-                   <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number"  min="0" placeholder="weight" ng-model="userDetails.weight" required >
+                   <input id="register_country" ng-disabled="!editProfile"  class="form-control topMarginForRegister" type="number"  min="0"  placeholder="Weight" ng-model="userDetails.weight" required >
 				  </div>
 				  
 				   <div class="form-group col-xs-12" ng-if="userDetails.role==='Consultant' && editProfile && !editCategoryName">
