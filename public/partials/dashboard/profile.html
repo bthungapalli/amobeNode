@@ -7,7 +7,7 @@
 <img src="images/default.png" class="user-image" alt="User Image" ng-if="!userDetails.userImagePath">
 <img class="user-image img-responsive"   ng-src="{{userDetails.userImagePath}}" ng-if="userDetails.userImagePath" />
 
-  <input class="white" type="file" name="uploadImage" file-model="userDetails.uploadImage" ng-hide="!editProfile"/>
+  <input  type="file" name="uploadImage" file-model="userDetails.uploadImage" ng-hide="!editProfile"/>
   <br>
      <br>
 
