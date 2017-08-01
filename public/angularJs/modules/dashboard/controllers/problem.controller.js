@@ -82,6 +82,11 @@
 				 $scope.problem.subcategory="Select Subcategory";
 			 }
 		 };
+		 
+		 
+		 $scope.deleteFile=function(index){
+			 $scope.problem.filePath.splice(index,1);
+		 }
 		
 		$scope.submitProblem=function(){
 			$scope.errorMessage="";
@@ -92,13 +97,9 @@
 				
 				if($scope.problem.file){
 					var problem=response;
-					
 					$scope.index=0;
-					
 					for(var i=0; i<$scope.problem.file.length;i++){
-						
 						problemsFactory.fileUpload($scope.problem.file[i]).then(function (response) {
-							debugger;
 							problem.filePath.push(response.filename);
 							$scope.index=$scope.index+1;
 							 if($scope.problem.file.length==$scope.index){
@@ -113,32 +114,22 @@
 						            	dashboardSpinnerService.stopSpinner();
 						            });
 							  }
-							
 						}).catch(function(error){
 			        		$scope.errorMessage="Some thing went wrong";
 			            	dashboardSpinnerService.stopSpinner();
 			            });
-						
 					}	
-						
-						
-					
 				}else{
 					$scope.init();
 					$state.go("dashboard.myProblems");
 					dashboardSpinnerService.stopSpinner();
 				}
 				
-				
             })
             .catch(function(error){
         		$scope.errorMessage="Some thing went wrong";
             	dashboardSpinnerService.stopSpinner();
             });
-			
-			
-			
-			
 			
 		};
 	};

@@ -56,6 +56,12 @@
 			<p>{{problem.summary}}</p>
 			<label>Description: </label>
 			<p ng-bind-html="problem.description | toTrustHtml"></p>
+			
+			
+			<div ng-if="problem.filePath.length>0">
+			  <label>Uploaded Files</label>
+			  <p ng-repeat="file in problem.filePath" >  <a href="problems/download/{{file}}">{{file}}</a> <p>
+			</div>
 
 
 			<div ng-if="problem.solution.username">

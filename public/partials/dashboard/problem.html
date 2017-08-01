@@ -5,7 +5,7 @@
   <div class="col-xs-12" ng-if="successMessage"><label class="text-success">{{successMessage}}</label></div>
 
 
-  <form  name="problemForm" ng-submit="submitProblem();">
+  <form  name="problemForm" ng-submit="submitProblem();" novalidate>
 
 		<div class="col-xs-6">
 			<div class="form-group">
@@ -48,7 +48,11 @@
     </div>
      <div class="col-xs-12">
            <input  type="file" name="uploadFile" file-model="problem.file" multiple/>
-     
+           <br>
+     <div ng-if="problem.filePath.length>0">
+	  <label>Uploaded Files</label>
+	  <p ng-repeat="file in problem.filePath" >  <a href="problems/download/{{file}}">{{file}}</a> <button  type="button"  ng-click="deleteFile($index)" class="btn btn-xs btn-danger"><span class="glyphicon glyphicon-remove"></span></button><p>
+	</div>
      </div>
     <div class="col-xs-12">
     <label class="checkbox-inline">

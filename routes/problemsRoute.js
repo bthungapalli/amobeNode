@@ -242,7 +242,7 @@ router.delete('/:id',checkSession.requireLogin,function (req,res,next){
 router.get('/download/:fileName',function(request,response,next){
 	var fileName = request.params.fileName;
 	console.log(fileName);
-	var file = nconf.get("recall").filesPath + fileName ;
+	var file = nconf.get("amoeba").filesPath + fileName ;
 	  response.download(file,fileName,function(err){
 		  if(err)
 			  response.json("Error Occured while downloading");
