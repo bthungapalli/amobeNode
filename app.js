@@ -18,7 +18,6 @@ var forgotPasswordRoute = require('./routes/forgotPasswordRoute');
 var commentRoute = require('./routes/commentRoute');
 
 
-
 var app = express();
 
 /************  Loading property file based on env  ****************/
@@ -75,7 +74,7 @@ app.use("/js",express.static(path.resolve(__dirname, './js')));
 app.use("/node_modules",express.static(path.resolve(__dirname, './node_modules')));
 app.use("/bower_components",express.static(path.resolve(__dirname, './bower_components')));
 app.use("/public",express.static(path.resolve(__dirname, './public')));
-app.use('/amoeba', mainRoute);
+app.use('/', mainRoute);
 app.use('/registration', registrationRoute);
 app.use('/login', loginRoute);
 app.use('/profile', profileRoute);
@@ -84,7 +83,7 @@ app.use('/categories', categoriesRoute);
 app.use('/problems', problemsRoute);
 app.use('/forgotPassword', forgotPasswordRoute);
 app.use('/comments', commentRoute);
-app.use('/amoeba/**', mainRoute);
+app.use('/**', mainRoute);
 
 
 // catch 404 and forward to error handler
