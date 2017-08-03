@@ -7,7 +7,7 @@
 	 });
 	
 	
-	appModule.config(function($stateProvider, $urlRouterProvider,$httpProvider){
+	appModule.config(function($stateProvider, $urlRouterProvider,$httpProvider,$locationProvider){
 		
 		$httpProvider.interceptors.push([function(){
 		    return {
@@ -68,8 +68,11 @@
 		            url: '/rerouteproblems',
 		            templateUrl: 'partials/dashboard/reRouteProblems.html',
 		            controller:'reRouteProblemsController'
-		        })  ;
-		    
+		        }).state('registrationConfirmation', {
+		            url: '/registrationConfirmation',
+		            controller:'registrationConfirmationController'
+		        });
+		    $locationProvider.html5Mode(true);
 		    $urlRouterProvider.otherwise('/');
 	});
 	

@@ -3,7 +3,6 @@ var router = express.Router();
 var problemsService=require("../services/problemsService");
 var checkSession=require("../services/checkSessionService");
 var userService=require("../services/userService");
-var nconf = require('nconf');
 var mailUtil=require("../utils/MailUtil");
 var multer = require('multer');
 var nconf = require('nconf');

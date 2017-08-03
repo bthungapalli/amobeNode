@@ -39,8 +39,8 @@ return{
 				 		 console.log("error:"+error);
 				 		 callbackForCreateOrUpdateUser(error);
 				 	 }
-				 	 var userCreated = new userModel({"_id":counter.seq,"firstName": user.firstName,"lastName": user.lastName,"password":user.password,
-					"email":user.email,"mobileNumber":user.mobileNumber,"address":user.address,"city":user.city,"state":user.state,"zipcode":user.zipcode,"cases":user.cases,
+				 	 var userCreated = new userModel({"_id":counter.seq,"firstName": user.firstName,"lastName": user.lastName,"password":user.password,"token":Math.random().toFixed(15),
+					"email":user.email,"mobileNumber":user.mobileNumber,"address":user.address,"city":user.city,"state":user.state,"zipcode":user.zipcode,"cases":user.cases,"registrationConfirmed":false,
 					"gender":user.gender,"role":user.role,"age":user.age,"height":user.height,"weight":user.weight,"category":user.category,"isActive": true,"last_login":new Date()});
 				 	 serviceObj.save(userCreated,callbackForCreateOrUpdateUser);
 				 });
@@ -53,8 +53,7 @@ return{
 			 }
    },
 	 checkUser:function(user,callbackForCheckUser){
-//		 var query = userModel.findOne({"email":user.email,"isActive":true});
-		var query = userModel.findOne({"email":user.email});	
+		 var query = userModel.findOne({"email":user.email,"isActive":true});
 		 this.execute(query,callbackForCheckUser);
 	 },
 	 getAllUsers:function(callbackForGetAllUsers){
@@ -89,6 +88,16 @@ return{
 		 var conditions = { "_id":id };
 		 var update = { $set: {"userImagePath":fileName,"updated_at":new Date()}};
 		 this.update({},conditions,update,callbackForUpdateImagePath);
+	 },
+	 getUserForToken:function(token,callbackForGetUsersForToken){
+		 var condition={ "token": token};
+		 var query = userModel.find(condition); 
+		 this.execute(query,callbackForGetUsersForToken);
+	 },
+	 activateUserByToken:function(token,callbackForActivateUserByToken){
+		 var conditions = { "token":token };
+		 var update = { $set: {"registrationConfirmed":true,"updated_at":new Date()}};
+		 this.update({},conditions,update,callbackForActivateUserByToken);
 	 }
 
 }

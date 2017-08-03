@@ -33,6 +33,8 @@ var UserSchema = new Schema({
     cases:{type:Number,required:false},
     isActive:{type:Boolean,required:false},
     last_login: {type: Date,required:false},
+    token:{type:Number,required:true},
+    registrationConfirmed:{type:Boolean,required:false},
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}
 });

@@ -120,7 +120,7 @@
 	    		 $loading.start('login');
 					loginFactory.register($scope.loginDetails)
 					.then(function (response) {
-						$scope.loginMessageDetails.successMessage.register="Successfully Registered";
+						$scope.loginMessageDetails.successMessage.register="Successfully Registered, Activation Link Mailed";
 						$scope.initializeLoginDetails();
 						$loading.finish('login');
 		            })
