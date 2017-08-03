@@ -4,7 +4,7 @@
 		        $loading.start('login');
 				loginFactory.confirmRegistration($location.search().token)
 				.then(function (response) {
-					$rootScope.registrationConfirmationMessageSuccess=response.success;
+					$rootScope.registrationConfirmationMessageSuccess=response.message;
 					$state.go("login");
 					$loading.finish('login');
 	            })

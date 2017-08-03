@@ -2,7 +2,6 @@
 	
 	function homeController($rootScope,$scope,$state,$uibModal,$loading,$location, $anchorScroll,LOGIN_CONSTANTS){
 		
-		
 		$scope.showLoginRegisterModal=function(){
 			
 			var modalInstance = $uibModal.open({

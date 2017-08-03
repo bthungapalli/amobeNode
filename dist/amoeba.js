@@ -114,7 +114,6 @@
 	
 	function homeController($rootScope,$scope,$state,$uibModal,$loading,$location, $anchorScroll,LOGIN_CONSTANTS){
 		
-		
 		$scope.showLoginRegisterModal=function(){
 			
 			var modalInstance = $uibModal.open({
@@ -151,6 +150,8 @@
 (function(){
 	
 	function loginModalController($scope, $uibModalInstance,$state,LOGIN_CONSTANTS,loginFactory,loginService,$loading){
+		
+		$rootScope.registrationConfirmationMessageSuccess="";
 		
 		 $scope.ok = function (userDetails) {
 			    $uibModalInstance.close(userDetails);
@@ -233,7 +234,13 @@
 					if(userDetails._id==undefined){
 						$scope.loginMessageDetails.errorMessage.login="Invalid Username or Password";
 					}else{
-						$scope.ok(userDetails);
+						if(!userDetails.registrationConfirmed){
+							$scope.loginMessageDetails.errorMessage.login="Account is not verified,Please click on the activation link sent ";
+						}else if(!userDetails.isActive){
+							$scope.loginMessageDetails.errorMessage.login="Admin disabled your account";
+						}else{
+							$scope.ok(userDetails);
+						}
 					}
 					$loading.finish('login');
 	            })
@@ -343,7 +350,7 @@
 		        $loading.start('login');
 				loginFactory.confirmRegistration($location.search().token)
 				.then(function (response) {
-					$rootScope.registrationConfirmationMessageSuccess=response.success;
+					$rootScope.registrationConfirmationMessageSuccess=response.message;
 					$state.go("login");
 					$loading.finish('login');
 	            })
