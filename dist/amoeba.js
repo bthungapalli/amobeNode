@@ -149,7 +149,7 @@
 
 (function(){
 	
-	function loginModalController($scope, $uibModalInstance,$state,LOGIN_CONSTANTS,loginFactory,loginService,$loading){
+	function loginModalController($scope,$rootScope, $uibModalInstance,$state,LOGIN_CONSTANTS,loginFactory,loginService,$loading){
 		
 		$rootScope.registrationConfirmationMessageSuccess="";
 		
@@ -338,7 +338,7 @@
 		 
 	};
 	
-	loginModalController.$inject=['$scope', '$uibModalInstance','$state','LOGIN_CONSTANTS','loginFactory','loginService','$loading'];
+	loginModalController.$inject=['$scope','$rootScope', '$uibModalInstance','$state','LOGIN_CONSTANTS','loginFactory','loginService','$loading'];
 	
 	angular.module('amoeba.home').controller("loginModalController",loginModalController);
 	
@@ -1022,6 +1022,22 @@
 			$state.go('dashboard.solution', {"problemId": problem._id})
 		}
 		
+		$scope.closeProblem=function(problem){
+			$scope.errorMessage="";
+			$scope.successMessage="";
+			dashboardSpinnerService.startSpinner();
+			problemsFactory.closeProblem(problem).then(function (response) {
+				problem.status="CLOSED";
+				dashboardSpinnerService.stopSpinner();
+            })
+            .catch(function(error){
+        		$scope.errorMessage="Some thing went wrong";
+            	dashboardSpinnerService.stopSpinner();
+            });
+		}
+		
+		
+		
 		
 	};
 	
@@ -1669,6 +1685,20 @@ angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($
 			return defered.promise;
 		};
 		
+		function closeProblem(problem){
+			var submitProblem=$resource("/problems/closeProblem");
+			var defered=$q.defer();
+			submitProblem.save(problem,
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
+		
+		
 		function fileUpload(file){
 			var defered=$q.defer();
 			 var payload = new FormData();
@@ -1707,7 +1737,8 @@ angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($
 			saveNewConsultant:saveNewConsultant,
 			getComments:getComments,
 			addComment:addComment,
-			fileUpload:fileUpload
+			fileUpload:fileUpload,
+			closeProblem:closeProblem
 		};
 	};
 	

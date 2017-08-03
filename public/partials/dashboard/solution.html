@@ -6,17 +6,19 @@
 			
 	
 	<div class="col-xs-12"  style="border:1px solid #00b3ac;">
-	<lablel>Title: </lablel>
+	<label>Title: </label>
 	<p>{{problem.title}}</p>
-	<lablel>Summary: </lablel>
+	<label>Summary: </label>
 	<p>{{problem.summary}}</p>
-	<lablel>Description: </lablel>
+	<label>Description: </label>
 	<p>{{problem.description}}</p>
-	<form  name="problemForm" ng-submit="submitSolution();">
+	<label ng-if="problem.status=='CLOSED'">Solution: </label>
+	<p ng-if="problem.status=='CLOSED'">{{solution.description}}</p>
+	<form ng-if="problem.status!='CLOSED'" name="problemForm" ng-submit="submitSolution();">
 	<div class="col-xs-12">
       <div class="form-group">
         <label for="categoryName">Solution <sup class="text-danger">*</sup></label>
-        <textarea class="form-control" rows="6" ui-tinymce="tinymceOptions" ng-model="solution.description" required></textarea>
+        <textarea  class="form-control" rows="6" ui-tinymce="tinymceOptions" ng-model="solution.description" required></textarea>
       </div>
     </div>
 	

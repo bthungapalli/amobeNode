@@ -160,13 +160,22 @@ router.post('/filterRecalls',checkSession.requireLogin,function (req,res,next){
 router.post('/newConsultant',checkSession.requireLogin,function (req,res,next){
 	var body = req.body;
 		var user=req.session.user;
-	problemsService.saveNewConsultant(body,function(err,recall){
+	problemsService.saveNewConsultant(body,function(err,problem){
 		if(err)
     		res.send("error");
-		res.json(recall);
+		res.json(problem);
 	});
 });
 
+router.post('/closeProblem',checkSession.requireLogin,function (req,res,next){
+	var problem = req.body;
+		var user=req.session.user;
+	problemsService.closeProblem(problem,function(err,problem){
+		if(err)
+    		res.send("error");
+		res.json(problem);
+	});
+});
 
 
 

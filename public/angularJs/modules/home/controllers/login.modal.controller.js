@@ -1,6 +1,6 @@
 (function(){
 	
-	function loginModalController($scope, $uibModalInstance,$state,LOGIN_CONSTANTS,loginFactory,loginService,$loading){
+	function loginModalController($scope,$rootScope, $uibModalInstance,$state,LOGIN_CONSTANTS,loginFactory,loginService,$loading){
 		
 		$rootScope.registrationConfirmationMessageSuccess="";
 		
@@ -189,7 +189,7 @@
 		 
 	};
 	
-	loginModalController.$inject=['$scope', '$uibModalInstance','$state','LOGIN_CONSTANTS','loginFactory','loginService','$loading'];
+	loginModalController.$inject=['$scope','$rootScope', '$uibModalInstance','$state','LOGIN_CONSTANTS','loginFactory','loginService','$loading'];
 	
 	angular.module('amoeba.home').controller("loginModalController",loginModalController);
 	

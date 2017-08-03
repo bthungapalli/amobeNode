@@ -220,7 +220,12 @@ return{
 		   var conditions = { "_id":body.problemId };
 			 var update = { $set: {"accepted_by":body.email,"accepted_at":new Date()}};
 			 this.update(body,conditions,update,callbackForGetAllProblems);
-		 }
+     },
+     closeProblem:function(problem,callbackForCloseProblem){
+  	   var conditions = { "_id":problem._id };
+  		 var update = { $set: {"status":"CLOSED","updated_at":new Date()}};
+  		 this.update(problem,conditions,update,callbackForCloseProblem);
+  	 }
 
 }
 }

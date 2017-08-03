@@ -39,8 +39,10 @@
 			ng-click="problem.show=!problem.show;solutionObj(problem);getComments(problem);">
 			<h3 style="margin-top: 5px; margin-bottom: 5px;">
 				{{problem.title}} <span ng-if="problem.status==='DRAFT'"
-					class="label label-primary" style="float: right;font-size: medium;">Draft</span> <span
-					class="label label-success" style="float: right;font-size: medium;">{{problem.category}}
+					class="label label-primary" style="float: right;font-size: medium;">Draft</span> 
+					<span ng-if="problem.status==='CLOSED'"
+					class="label label-danger" style="float: right;font-size: medium;">Closed</span>
+					<span class="label label-success" style="float: right;font-size: medium;">{{problem.category}}
 					{{problem.subcategory}}</span>
 
 			</h3>
@@ -80,10 +82,12 @@
 <div class="col-xs-12 text-center">
 				<button type="button" ng-if="acceptedProblems"
 					ng-click="submitSolution(problem);" class="btn btn-success">Solution</button>
-				<button type="button" ng-if="myProblems"
+				<button type="button" ng-if="myProblems && problem.status!='CLOSED'"
 					ng-click="editProblem(problem);" class="btn btn-primary">Edit</button>
 				<button type="button" ng-if="allProblems"
 					ng-click="acceptProblem(problem,$index);" class="btn btn-primary">Accept</button>
+					<button type="button" ng-if="myProblems && problem.solution.username && problem.status!='CLOSED'"
+					ng-click="closeProblem(problem);" class="btn btn-danger">Close</button>
 			</div>
 <br>
 <label>Comments:</label>

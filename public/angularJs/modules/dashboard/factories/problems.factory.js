@@ -152,6 +152,20 @@
 			return defered.promise;
 		};
 		
+		function closeProblem(problem){
+			var submitProblem=$resource("/problems/closeProblem");
+			var defered=$q.defer();
+			submitProblem.save(problem,
+		    function(response){
+				defered.resolve(response);
+			},function(error){
+				defered.reject(error);
+			});
+			return defered.promise;
+		};
+		
+		
+		
 		function fileUpload(file){
 			var defered=$q.defer();
 			 var payload = new FormData();
@@ -190,7 +204,8 @@
 			saveNewConsultant:saveNewConsultant,
 			getComments:getComments,
 			addComment:addComment,
-			fileUpload:fileUpload
+			fileUpload:fileUpload,
+			closeProblem:closeProblem
 		};
 	};
 	

@@ -149,6 +149,22 @@
 			$state.go('dashboard.solution', {"problemId": problem._id})
 		}
 		
+		$scope.closeProblem=function(problem){
+			$scope.errorMessage="";
+			$scope.successMessage="";
+			dashboardSpinnerService.startSpinner();
+			problemsFactory.closeProblem(problem).then(function (response) {
+				problem.status="CLOSED";
+				dashboardSpinnerService.stopSpinner();
+            })
+            .catch(function(error){
+        		$scope.errorMessage="Some thing went wrong";
+            	dashboardSpinnerService.stopSpinner();
+            });
+		}
+		
+		
+		
 		
 	};
 	
