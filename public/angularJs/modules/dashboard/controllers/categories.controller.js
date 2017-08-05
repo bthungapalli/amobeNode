@@ -23,6 +23,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.getCategories().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.categories=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -59,6 +60,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.submitCategory($scope.category).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				if($scope.editCategoryFlag){
 					$scope.categories[$scope.editCategoryIndex]=response;
 					$scope.editCategoryIndex=0;

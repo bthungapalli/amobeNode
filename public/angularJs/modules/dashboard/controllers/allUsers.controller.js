@@ -7,6 +7,7 @@
 		$scope.getAllUsers=function(){
 			dashboardSpinnerService.startSpinner();
 			allUsersFactory.getAllUsers().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.users=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -22,6 +23,7 @@
 			var newUser=angular.copy(user);
 			newUser.isActive=value;
 			allUsersFactory.activateOrDeactivateUsers(newUser).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				user.isActive=value;
 				dashboardSpinnerService.stopSpinner();
             })

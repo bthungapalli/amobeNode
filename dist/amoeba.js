@@ -28,6 +28,17 @@
 		            url: '/amoeba',
 		            templateUrl: 'partials/home/home.html',
 		            controller:'homeController'
+//		            resolve:{
+//		            	dashboardUserDetailsFactory:'dashboardUserDetailsFactory',
+//					        userTypesDetails:function($rootScope,dashboardUserDetailsFactory,$state){
+//					            	return	dashboardUserDetailsFactory.checkSessionExist().
+//					    				then(function(userDetails){
+//					    						$rootScope.userDetails=userDetails;
+//					    				}).catch(function(reason) {
+//					    					$rootScope.userDetails=undefined;
+//					    				});
+//						            }
+//					         }
 		        }).state('dashboard', {
 		            url: '/amoeba/dashboard',
 		            templateUrl: 'partials/dashboard/dashboard.html',
@@ -133,6 +144,7 @@
 			     // cancel
 			    });
 		};
+		
 		
 		
 		$scope.navigateTo=function(id){
@@ -563,6 +575,7 @@
 		$scope.getAllUsers=function(){
 			dashboardSpinnerService.startSpinner();
 			allUsersFactory.getAllUsers().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.users=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -578,6 +591,7 @@
 			var newUser=angular.copy(user);
 			newUser.isActive=value;
 			allUsersFactory.activateOrDeactivateUsers(newUser).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				user.isActive=value;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -618,6 +632,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.getCategories().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.categories=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -654,6 +669,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.submitCategory($scope.category).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				if($scope.editCategoryFlag){
 					$scope.categories[$scope.editCategoryIndex]=response;
 					$scope.editCategoryIndex=0;
@@ -720,6 +736,12 @@
 				$state.go(state);
 			}
 		};
+		
+		$scope.redirectToLoginIfSessionExpires=function(res){
+			if(res.sessionExpired){
+				$state.go("login");
+			};
+		};
 	};
 	
 	
@@ -771,6 +793,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblem($scope.problemId).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problem=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -790,6 +813,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.getAllCategories().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.categories=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -825,7 +849,7 @@
 			dashboardSpinnerService.startSpinner();
 			
 			problemsFactory.submitProblem($scope.problem).then(function (response) {
-				
+				$scope.redirectToLoginIfSessionExpires(response);
 				if($scope.problem.file){
 					var problem=response;
 					$scope.index=0;
@@ -889,6 +913,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -906,6 +931,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getMyProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -923,6 +949,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getAcceptedProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -958,6 +985,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.acceptProblem(problem).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$state.go("dashboard.acceptedProblems")
 				dashboardSpinnerService.stopSpinner();
             })
@@ -974,6 +1002,7 @@
 				$scope.successMessage="";
 				dashboardSpinnerService.startSpinner();
 				problemsFactory.getSolutionByProblemId(problem._id).then(function (response) {
+					$scope.redirectToLoginIfSessionExpires(response);
 					problem.solution=response;
 					dashboardSpinnerService.stopSpinner();
 	            })
@@ -990,6 +1019,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getComments(problem._id).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				problem.comments=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -1006,6 +1036,7 @@
 				$scope.successMessage="";
 				dashboardSpinnerService.startSpinner();
 				problemsFactory.addComment(problem).then(function (response) {
+					$scope.redirectToLoginIfSessionExpires(response);
 					problem.comment="";
 					problem.comments.push(response);
 					dashboardSpinnerService.stopSpinner();
@@ -1027,6 +1058,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.closeProblem(problem).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				problem.status="CLOSED";
 				dashboardSpinnerService.stopSpinner();
             })
@@ -1066,6 +1098,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.getAllCategories().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.categories=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -1133,6 +1166,7 @@
 				if($scope.userDetails.uploadImage){
 					
 					profileFactory.uploadFile($scope.userDetails).then(function (response) {
+						$scope.redirectToLoginIfSessionExpires(response);
 						$scope.editProfile=!$scope.editProfile;
 						$scope.userDetails.userImagePath=response.path;
 						$rootScope.$broadcast('profile-update', $scope.userDetails);
@@ -1173,6 +1207,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getBlockedAcceptedProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -1193,6 +1228,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			allUsersFactory.getUsersForProblem(problem.category,problem.subcategory,problem.accepted_by).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.users=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -1207,6 +1243,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.saveNewConsultant($scope.newConsultant,problem._id).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.newConsultant="Select Consultant";
 				$scope.getBlockedAcceptedProblems();
 				dashboardSpinnerService.stopSpinner();
@@ -1257,6 +1294,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblem($scope.problemId).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problem=response;
 				$scope.solution.problemTitle=response.title;
 				$scope.solution.problemCreatedBy=response.created_by;
@@ -1273,6 +1311,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getSolutionByProblemId($scope.problemId).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.solution.description=response.description;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -1291,6 +1330,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.submitSolution($scope.solution).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$state.go("dashboard.problems");
 				dashboardSpinnerService.stopSpinner();
             })
@@ -1504,7 +1544,7 @@ angular.module("amoeba.dashboard").directive('fileModel', ['$parse', function ($
 		
 		var checkSessionExist=function(){
 			var defered=$q.defer();
-			    $http.get("/checkUser")
+			    $http.get("/amoeba/checkUser")
                 .success(function (userDetails){
                 	defered.resolve(userDetails);
                 })

@@ -84,7 +84,7 @@ app.use('/categories', categoriesRoute);
 app.use('/problems', problemsRoute);
 app.use('/forgotPassword', forgotPasswordRoute);
 app.use('/comments', commentRoute);
-app.use('/amoeba/**', mainRoute);
+app.use('/**', mainRoute);
 
 
 // catch 404 and forward to error handler

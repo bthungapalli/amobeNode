@@ -38,6 +38,12 @@
 				$state.go(state);
 			}
 		};
+		
+		$scope.redirectToLoginIfSessionExpires=function(res){
+			if(res.sessionExpired){
+				$state.go("login");
+			};
+		};
 	};
 	
 	

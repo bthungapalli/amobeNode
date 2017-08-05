@@ -28,6 +28,17 @@
 		            url: '/amoeba',
 		            templateUrl: 'partials/home/home.html',
 		            controller:'homeController'
+//		            resolve:{
+//		            	dashboardUserDetailsFactory:'dashboardUserDetailsFactory',
+//					        userTypesDetails:function($rootScope,dashboardUserDetailsFactory,$state){
+//					            	return	dashboardUserDetailsFactory.checkSessionExist().
+//					    				then(function(userDetails){
+//					    						$rootScope.userDetails=userDetails;
+//					    				}).catch(function(reason) {
+//					    					$rootScope.userDetails=undefined;
+//					    				});
+//						            }
+//					         }
 		        }).state('dashboard', {
 		            url: '/amoeba/dashboard',
 		            templateUrl: 'partials/dashboard/dashboard.html',

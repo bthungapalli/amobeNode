@@ -40,6 +40,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblem($scope.problemId).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problem=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -59,6 +60,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.getAllCategories().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.categories=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -94,7 +96,7 @@
 			dashboardSpinnerService.startSpinner();
 			
 			problemsFactory.submitProblem($scope.problem).then(function (response) {
-				
+				$scope.redirectToLoginIfSessionExpires(response);
 				if($scope.problem.file){
 					var problem=response;
 					$scope.index=0;

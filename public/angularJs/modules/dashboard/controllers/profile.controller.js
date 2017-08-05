@@ -17,6 +17,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			categoryFactory.getAllCategories().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.categories=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -84,6 +85,7 @@
 				if($scope.userDetails.uploadImage){
 					
 					profileFactory.uploadFile($scope.userDetails).then(function (response) {
+						$scope.redirectToLoginIfSessionExpires(response);
 						$scope.editProfile=!$scope.editProfile;
 						$scope.userDetails.userImagePath=response.path;
 						$rootScope.$broadcast('profile-update', $scope.userDetails);

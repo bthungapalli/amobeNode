@@ -30,6 +30,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblem($scope.problemId).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problem=response;
 				$scope.solution.problemTitle=response.title;
 				$scope.solution.problemCreatedBy=response.created_by;
@@ -46,6 +47,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getSolutionByProblemId($scope.problemId).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.solution.description=response.description;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -64,6 +66,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.submitSolution($scope.solution).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$state.go("dashboard.problems");
 				dashboardSpinnerService.stopSpinner();
             })

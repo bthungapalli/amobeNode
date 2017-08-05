@@ -16,6 +16,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -33,6 +34,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getMyProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -50,6 +52,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getAcceptedProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -85,6 +88,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.acceptProblem(problem).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$state.go("dashboard.acceptedProblems")
 				dashboardSpinnerService.stopSpinner();
             })
@@ -101,6 +105,7 @@
 				$scope.successMessage="";
 				dashboardSpinnerService.startSpinner();
 				problemsFactory.getSolutionByProblemId(problem._id).then(function (response) {
+					$scope.redirectToLoginIfSessionExpires(response);
 					problem.solution=response;
 					dashboardSpinnerService.stopSpinner();
 	            })
@@ -117,6 +122,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getComments(problem._id).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				problem.comments=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -133,6 +139,7 @@
 				$scope.successMessage="";
 				dashboardSpinnerService.startSpinner();
 				problemsFactory.addComment(problem).then(function (response) {
+					$scope.redirectToLoginIfSessionExpires(response);
 					problem.comment="";
 					problem.comments.push(response);
 					dashboardSpinnerService.stopSpinner();
@@ -154,6 +161,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.closeProblem(problem).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				problem.status="CLOSED";
 				dashboardSpinnerService.stopSpinner();
             })

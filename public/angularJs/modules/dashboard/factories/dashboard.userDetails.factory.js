@@ -16,7 +16,7 @@
 		
 		var checkSessionExist=function(){
 			var defered=$q.defer();
-			    $http.get("/checkUser")
+			    $http.get("/amoeba/checkUser")
                 .success(function (userDetails){
                 	defered.resolve(userDetails);
                 })

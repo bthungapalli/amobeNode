@@ -23,6 +23,7 @@
 		};
 		
 		
+		
 		$scope.navigateTo=function(id){
 		      var someElement = angular.element(document.getElementById(id));
 		      $document.scrollToElement(someElement, 110, 2000);

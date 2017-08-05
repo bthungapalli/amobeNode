@@ -12,6 +12,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.getBlockedAcceptedProblems().then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.problems=response;
 				if(response.length==0){
 					$scope.successMessage="No Problems Available";
@@ -32,6 +33,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			allUsersFactory.getUsersForProblem(problem.category,problem.subcategory,problem.accepted_by).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.users=response;
 				dashboardSpinnerService.stopSpinner();
             })
@@ -46,6 +48,7 @@
 			$scope.successMessage="";
 			dashboardSpinnerService.startSpinner();
 			problemsFactory.saveNewConsultant($scope.newConsultant,problem._id).then(function (response) {
+				$scope.redirectToLoginIfSessionExpires(response);
 				$scope.newConsultant="Select Consultant";
 				$scope.getBlockedAcceptedProblems();
 				dashboardSpinnerService.stopSpinner();
