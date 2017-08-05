@@ -25,11 +25,11 @@
 		  $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 		  
 		    $stateProvider.state('login', {
-		            url: '/',
+		            url: '/amoeba',
 		            templateUrl: 'partials/home/home.html',
 		            controller:'homeController'
 		        }).state('dashboard', {
-		            url: '/dashboard',
+		            url: '/amoeba/dashboard',
 		            templateUrl: 'partials/dashboard/dashboard.html',
 		            controller:'dashboardController'
 		        }).state('dashboard.profile', {
@@ -69,11 +69,11 @@
 		            templateUrl: 'partials/dashboard/reRouteProblems.html',
 		            controller:'reRouteProblemsController'
 		        }).state('registrationConfirmation', {
-		            url: '/registrationConfirmation',
+		            url: '/amoeba/registrationConfirmation',
 		            controller:'registrationConfirmationController'
 		        });
 		    $locationProvider.html5Mode(true);
-		    $urlRouterProvider.otherwise('/');
+		    $urlRouterProvider.otherwise('/amoeba');
 	});
 	
 	appModule.run(function($state){
