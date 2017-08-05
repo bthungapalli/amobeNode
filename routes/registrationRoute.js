@@ -68,9 +68,6 @@ router.get('/registrationConfirmation',function (req,res,next){
 
 	});
 	
-	
-	
-	
 });
 
 

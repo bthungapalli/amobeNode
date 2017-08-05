@@ -48,7 +48,7 @@
 			</h3>
 
 			<p style="margin-bottom: 0px;">
-				{{problem.anonymous?'':problem.username}} <span
+				{{problem.anonymous?'Anonymous':problem.username}} <span
 					class="glyphicon glyphicon-calendar" style="color: #40c15d"></span>{{problem.created_at
 				| date:'dd MMM yyyy'}}
 			</p>
@@ -97,7 +97,7 @@
       			</div>
     		
     		<div class="col-xs-12" ng-repeat="comment in problem.comments">
-    		<label>{{comment.username}}</label> {{comment.created_at | date:'dd MMM yyyy'}}
+    		<label>{{(comment.email==problem.created_by && problem.anonymous)? 'Anonymous':comment.username}}</label> {{comment.created_at | date:'dd MMM yyyy'}}
     		<p>{{comment.comment}}</p>
     		</div>
 
