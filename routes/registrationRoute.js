@@ -24,7 +24,7 @@ router.post('/',function (req,res,next){
 						username : createdUser.firstName,
 						appURL : nconf.get("mail").appURL,
 						appName : nconf.get("mail").appName,
-						activationURL:nconf.get("context").path+"registrationConfirmation?token="+createdUser.token
+						activationURL:nconf.get("context").path+"amoeba/registrationConfirmation?token="+createdUser.token
 					};
 				mailUtil.sendMail(createdUser.email,nconf.get("smtpConfig").authUser,subject,template,context,function(err){
 				
