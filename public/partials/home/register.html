@@ -37,15 +37,7 @@
 					  <input type="radio" name="inlineRadioOptions1" id="inlineRadio2" ng-model="loginDetails.role" value="Consultant" required> Consultant
 					</label>
 				  </div>
-				  <div class="form-group" >
-				    <label for="exampleInputPassword1">Gender</label>
-				    <label class="radio-inline">
-					  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" ng-model="loginDetails.gender" value="Male" required> Male
-					</label>
-					<label class="radio-inline">
-					  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" ng-model="loginDetails.gender" value="Female" required> Female
-					</label>
-				  </div>
+				  
 				  <div class="form-group" ng-if="loginDetails.role==='Consultant'">
 				    <label for="exampleInputEmail1">No Of Cases</label>
                    <input id="register_country" class="form-control topMarginForRegister" type="number" placeholder="Number" ng-model="loginDetails.cases" required >
@@ -112,14 +104,6 @@
 				  <div class="form-group" ng-if="loginDetails.role==='User'">
 				    <label for="exampleInputEmail1">Age</label>
                    <input id="register_country" class="form-control topMarginForRegister" type="number" min="0" placeholder="Age" ng-model="loginDetails.age" required >
-				  </div>
-				  <div class="form-group" ng-if="loginDetails.role==='User'">
-				    <label for="exampleInputPassword1">Height</label>
-                   <input id="register_country" class="form-control topMarginForRegister" type="number" min="0" placeholder="Height" ng-model="loginDetails.height" required >
-				  </div>
-				  <div class="form-group" ng-if="loginDetails.role==='User'">
-				    <label for="exampleInputPassword1">Weight</label>
-                   <input id="register_country" class="form-control topMarginForRegister" type="number" placeholder="Weight" min="0" ng-model="loginDetails.weight" required >
 				  </div>
 				  
                 </div>
