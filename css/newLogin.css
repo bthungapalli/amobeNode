@@ -80,23 +80,20 @@
 }
 
 .faq{
-	padding-top: 50px;
+	padding-top: 20px;
     padding-bottom: 50px;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
 }
 
-.faq> h3,h6{
+.faq> h2,h6{
 	text-align: center;
 }
 
 .faq>h6{
-    margin-bottom: 50px;
+    margin-bottom: 60px;
 }
 
-.faq>div>p{
-    padding-left: 15px;
-}
 
 #successTick{
 	color:green;
@@ -172,7 +169,6 @@
 
 .meetOurTeamContent{
     padding-left: 50px;
-    padding-top: 65px;
     padding-bottom: 65px;
     padding-right: 175px;
 }
@@ -188,9 +184,9 @@
     padding-right: 10%;
 }
 
-.pricingPlan> h3,h6{
+/* .pricingPlan> h3,h6{
 	text-align: center;
-}
+} */
 
 .userTypes{
     padding-bottom: 40px;
@@ -201,10 +197,10 @@
 	position:relative;
 	margin-right: 20px;
     margin-left: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 30px;
         padding-top: 20px;
         left: 6%;
-            height: auto;
+            height: 225px;
     text-align: center;
     border-radius: 5px;
     border: 2px solid #dfdfdf;
@@ -214,10 +210,11 @@
 	position:relative;
 	margin-right: 20px;
     margin-left: 20px;
-        margin-bottom: 20px;
+        margin-bottom: 35px;
         padding-top: 20px;
         left: 6%;
         text-align: center;
+        border-radius: 5px;
 }
 
 .faq-icon{
@@ -364,4 +361,29 @@ position: relative;
 
 .btn-primary {
 	background: url(../images/bg.png) !important;
+}
+
+.faqAnswer{
+color: #808080;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 30px;
+    margin-bottom: 15px;
+}
+    
+.panel-heading{
+background-color: #9cc026 !important;
+padding: 21px 25px !important;
+    border-radius: 5px;
+} 
+
+.panel-heading:hover{
+background-color: #54be73 !important;
+}    
+
+.panel-body{
+	    border: 2px solid #dfdfdf;
+    border-radius: 3px;
+    padding: 30px;
 }
