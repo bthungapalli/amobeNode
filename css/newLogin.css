@@ -1,0 +1,367 @@
+.nav > li > a{
+	padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (max-width:767px) {
+.nav > li > a{
+	padding-top: 2px;
+    padding-bottom: 2px;
+}
+}
+
+
+@media (max-width:769px) {
+.header-wrapper-mobile{
+	min-height: 700px;
+	background: #444 url(../images/home.jpg);
+	background-size: cover;
+	text-align: center;
+	color:white;
+	padding-top: 160px;
+}
+}
+
+@media (min-width:770px) {
+.header-wrapper-desktop{
+	min-height: 700px;
+	background: #444 url(../images/home.jpg) no-repeat center center fixed;
+	background-size: cover;
+	text-align: center;
+	color:white;
+	padding-top: 160px;
+}
+}
+
+@media (max-width:1024px) and (orientation: landscape) {
+    .header-wrapper-mobile{
+	min-height: 700px;
+	background: #444 url(../images/home.jpg);
+	background-size: cover;
+	text-align: center;
+	color:white;
+	padding-top: 160px;
+}
+}
+
+@media (min-width:768px) {
+.sidebar-collapse .content-wrapper, .sidebar-collapse .right-side, .sidebar-collapse .main-footer {
+	margin-left: 0
+}
+}
+
+.brandLogo{
+    width: 92px;
+    margin: 8px 20px;
+}
+
+.header-content{
+	    padding-top: 4%;
+}
+
+.greyBgColor{
+	background-color: #f2f2f2;
+}
+
+.whiteBgColor{
+	background-color: white;
+}
+
+.blackBgColor{
+	background-color: black;
+}
+
+.aboutUs{
+	padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    padding-left: 13%;
+    padding-right: 13%;
+}
+
+.faq{
+	padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.faq> h3,h6{
+	text-align: center;
+}
+
+.faq>h6{
+    margin-bottom: 50px;
+}
+
+.faq>div>p{
+    padding-left: 15px;
+}
+
+#successTick{
+	color:green;
+}
+
+.question:before{
+	content:"\2714";
+	color:green;
+}
+
+.tAndC{
+	padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.contactUs{
+	padding-top: 20px;
+    padding-bottom: 50px;
+    text-align: center;
+    padding-left: 13%;
+    padding-right: 13%;
+    color:white;
+}
+
+.contactUs>h3{
+	color:#9fc95d;
+    margin-bottom: 30px;
+}
+
+.copyRight{
+	
+	background-color:#9fc95d;
+	color:black;
+}
+.copyRight>p{
+	margin-top: 10px;
+}
+
+.footerNav{
+    padding-top: 25px;
+    padding-bottom: 15px;
+}
+
+.footerNav>li{
+	    list-style-type: none;
+	    display: inline;
+	    padding-left:20px;
+}
+
+.navArrow{
+       min-width: 35px;
+    background-color: black;
+    position: fixed;
+    bottom: 6%;
+    color: white;
+    right: 4%;
+    min-height: 35px;
+    text-align: center;
+    line-height: 35px;
+}
+
+.footerNav>li>a{
+	    color:white !important;
+}
+
+.meetOurTeam{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.meetOurTeamContent{
+    padding-left: 50px;
+    padding-top: 65px;
+    padding-bottom: 65px;
+    padding-right: 175px;
+}
+
+.meetOurImage{
+	background: #444 url(../images/back-bg.png) no-repeat center center;
+}
+
+.pricingPlan{
+	padding-top: 50px;
+    margin-bottom: 30px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.pricingPlan> h3,h6{
+	text-align: center;
+}
+
+.userTypes{
+    padding-bottom: 40px;
+    padding-top: 35px;
+}
+
+.userType{
+	position:relative;
+	margin-right: 20px;
+    margin-left: 20px;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        left: 6%;
+            height: auto;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #dfdfdf;
+}
+
+.faq-block{
+	position:relative;
+	margin-right: 20px;
+    margin-left: 20px;
+        margin-bottom: 20px;
+        padding-top: 20px;
+        left: 6%;
+        text-align: center;
+}
+
+.faq-icon{
+	background-color:#9cc026;
+    border-radius: 50%;
+    height: 4em;
+    width: 4em;
+    margin-right: auto;
+    margin-left: auto;
+    color: white;
+    margin-top: -71px;
+}
+
+.faq-icon>h3{
+	line-height: 2.3em;
+}
+.userType>p{
+	color:rgba(29, 27, 27, 0.65);
+}
+
+.aboutUs>p{
+	color:rgba(29, 27, 27, 0.65);
+}
+
+.tAndC>p{
+	color:rgba(29, 27, 27, 0.65);
+}
+
+.well>p{
+	color:rgba(29, 27, 27, 0.65);
+}
+
+.answer{
+	color:rgba(29, 27, 27, 0.65);
+}
+
+.faq>h6{
+	color:rgba(29, 27, 27, 0.65);
+}
+
+.pricingPlan> h6{
+	color:rgba(29, 27, 27, 0.65);
+}
+.customButton{
+	color: #fc6b43;
+    background-color: white;
+    border-radius: 24px;
+    width: 100px;
+    height: 40px;
+    border: 2px solid #fc6b43 !important;
+}
+
+.videoButton{
+	background-color: #fe582b;
+    border-radius: 30px;
+    height: 40px;
+    border: 2px solid #fe582b;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 15px;
+}
+
+.borderLine{
+	min-height: 2px;
+    margin-left: 42%;
+    margin-right: 42%;
+    background-color: #fc582b;
+    margin-bottom: 30px;
+    padding-bottom: 0px !important;
+}
+
+.aboutUsBorderLine,.pricingPlanBorderLine{
+	min-height: 2px;
+    margin-left: 46%;
+    margin-right: 46%;
+    background-color: #fc582b;
+    margin-bottom: 30px;
+}
+
+.meetOurTeamBorderLine{
+	min-height: 2px;
+    margin-right: 84%;
+    background-color: #fc582b;
+    margin-bottom: 30px;
+}
+
+.borderLineContactUs{
+	min-height: 2px;
+    margin-left: 42%;
+    margin-right: 42%;
+    background-color: #fc582b;
+    margin-bottom: 15px;
+    padding-bottom: 0px !important;
+}
+
+.header-content>h1{
+	font-size: 55px;
+}
+.header-content>h2{
+	font-size: 40px;
+}
+
+.upperHeader{
+	background-color: #4ada54;
+	color:#c6f6c4;
+	text-align: right;
+	position: fixed;
+	top:0px;
+	z-index:1;
+	padding-right: 50px;
+	line-height: 30px;
+}
+
+.navbar-fixed-top {
+	top: 30px !important;
+}
+
+.footerNav>li>a:hover{
+color: #fc582b !important;
+}
+
+.navbar-nav>li>a:hover{
+	color:#328c2f !important;
+}
+
+.footerNav>li>a>label{
+cursor: pointer;
+}
+
+.navbar-nav>li>a>label{
+	cursor: pointer;
+}
+
+.confirmationMessage{
+position: relative;
+    top: 8px;
+}
+
+.modal-content{
+	background-color: #ececec !important;
+}
+
+.btn-primary {
+	background: url(../images/bg.png) !important;
+}

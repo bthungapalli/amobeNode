@@ -39,6 +39,9 @@
 //					    				});
 //						            }
 //					         }
+		        }).state('new', {
+		            url: '/amoeba/new',
+		            templateUrl: 'partials/home/newHome.html'
 		        }).state('dashboard', {
 		            url: '/amoeba/dashboard',
 		            templateUrl: 'partials/dashboard/dashboard.html',
