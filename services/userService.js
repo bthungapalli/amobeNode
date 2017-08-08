@@ -41,14 +41,14 @@ return{
 				 	 }
 				 	 var userCreated = new userModel({"_id":counter.seq,"firstName": user.firstName,"lastName": user.lastName,"password":user.password,"token":Math.random().toFixed(15),
 					"email":user.email,"mobileNumber":user.mobileNumber,"address":user.address,"city":user.city,"state":user.state,"zipcode":user.zipcode,"cases":user.cases,"registrationConfirmed":false,
-					"role":user.role,"age":user.age,"category":user.category,"isActive": true,"last_login":new Date()});
+					"anonymous":true,"role":user.role,"age":user.age,"category":user.category,"isActive": true,"last_login":new Date()});
 				 	 serviceObj.save(userCreated,callbackForCreateOrUpdateUser);
 				 });
 			 }else{
 				 var conditions = { "_id":user._id };
 				 var update = { $set: {"mobileNumber":user.mobileNumber,"address":user.address,"firstName": user.firstName,"lastName": user.lastName,
-					 			"city":user.city,"state":user.state,"zipcode":user.zipcode,"age":user.age,"cases":user.cases,
-					 			"updated_at":new Date()}};
+					             "anonymous":user.anonymous,"city":user.city,"state":user.state,"zipcode":user.zipcode,
+					             "age":user.age,"cases":user.cases,"updated_at":new Date()}};
 				 this.update(user,conditions,update,callbackForCreateOrUpdateUser);
 			 }
    },

@@ -25,7 +25,7 @@
 					"summary":"",
 					"description":"",
 					"status":"",
-					"anonymous":false,
+					"anonymous":dashboardUserDetailsService.userDetails.anonymous,
 					"category":"",
 					"subcategory":"Select Subcategory",
 					"tempCategory":"Select Category"

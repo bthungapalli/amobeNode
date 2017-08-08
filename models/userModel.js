@@ -31,6 +31,7 @@ var UserSchema = new Schema({
     isActive:{type:Boolean,required:false},
     last_login: {type: Date,required:false},
     token:{type:Number,required:true},
+    anonymous  :{type:Boolean,required: true,default: true},
     registrationConfirmed:{type:Boolean,required:false},
     created_at: {type: Date, default: Date.now},
     updated_at: {type: Date, default: Date.now}
