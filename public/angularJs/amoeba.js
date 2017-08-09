@@ -26,24 +26,24 @@
 		  
 		    $stateProvider.state('login', {
 		            url: '/amoeba',
-		            templateUrl: 'partials/home/home.html',
-		            controller:'homeController'
-//		            resolve:{
-//		            	dashboardUserDetailsFactory:'dashboardUserDetailsFactory',
-//					        userTypesDetails:function($rootScope,dashboardUserDetailsFactory,$state){
-//					            	return	dashboardUserDetailsFactory.checkSessionExist().
-//					    				then(function(userDetails){
-//					    						$rootScope.userDetails=userDetails;
-//					    				}).catch(function(reason) {
-//					    					$rootScope.userDetails=undefined;
-//					    				});
-//						            }
-//					         }
-		        }).state('new', {
-		            url: '/amoeba/new',
-		            templateUrl: 'partials/home/newHome.html'
+		            templateUrl: 'partials/home/newHome.html',
+		            controller:'homeController',
+		            resolve:{
+		            	dashboardUserDetailsFactory:'dashboardUserDetailsFactory',
+					        userTypesDetails:function($rootScope,dashboardUserDetailsFactory,$state){
+					            	return	dashboardUserDetailsFactory.checkSessionExist().
+					    				then(function(userDetails){
+					    					if(!userDetails.sessionExpired){
+					    						$rootScope.userDetails=userDetails;
+					    						$state.go("dashboard");
+					    					}
+					    				}).catch(function(reason) {
+					    					$rootScope.userDetails=undefined;
+					    				});
+						            }
+					         }
 		        }).state('dashboard', {
-		            url: '/amoeba/dashboard',
+		            url: '/dashboard',
 		            templateUrl: 'partials/dashboard/dashboard.html',
 		            controller:'dashboardController'
 		        }).state('dashboard.profile', {
@@ -86,7 +86,7 @@
 		            url: '/amoeba/registrationConfirmation',
 		            controller:'registrationConfirmationController'
 		        });
-		    $locationProvider.html5Mode(true);
+		   // $locationProvider.html5Mode(true);
 		    $urlRouterProvider.otherwise('/amoeba');
 	});
 	

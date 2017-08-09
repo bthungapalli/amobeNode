@@ -3,11 +3,10 @@
   <div id="loginModal">
   <div dw-loading="login" dw-loading-options="{text: 'Loading...'}" > 
   <div class="modal-header" align="center"> 
-  		<img  id="img_logo" src="images/logo.png">
         <button type="button" class="close" aria-label="Close" ng-click="cancel();"> <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> </button>
   </div>
   
-   <div class="modal-body">
+   <div class="modal-body" style="padding-top: 0px;">
 
 		   <div ng-messages="loginMessageDetails.errorMessage" class="text-danger" >
 		    <div ng-message="login">{{loginMessageDetails.errorMessage.login}}</div>

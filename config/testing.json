@@ -27,7 +27,7 @@
        "authPassword":""
    },
    "context":{
-	   	"path":"http://ec2-52-25-181-47.us-west-2.compute.amazonaws.com/"
+	   	"path":"http://ec2-52-25-181-47.us-west-2.compute.amazonaws.com/#/"
   },
    "amoeba":{
 	   "filesPath":"/Users/apatha/Desktop/uploads/",

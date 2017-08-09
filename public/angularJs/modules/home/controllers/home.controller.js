@@ -1,6 +1,6 @@
 (function(){
 	
-	function homeController($rootScope,$scope,$state,$uibModal,$loading,$location, $anchorScroll,LOGIN_CONSTANTS){
+	function homeController($rootScope,$scope,$state,$uibModal,$loading,$location, $anchorScroll,LOGIN_CONSTANTS,$document){
 		
 		$scope.showLoginRegisterModal=function(){
 			
@@ -26,11 +26,11 @@
 		
 		$scope.navigateTo=function(id){
 		      var someElement = angular.element(document.getElementById(id));
-		      $document.scrollToElement(someElement, 110, 2000);
+		      $document.scrollToElement(someElement, 0, 2000);
 		};
 	};
 	
-	homeController.$inject=['$rootScope','$scope','$state','$uibModal','$loading','$location','$anchorScroll','LOGIN_CONSTANTS'];
+	homeController.$inject=['$rootScope','$scope','$state','$uibModal','$loading','$location','$anchorScroll','LOGIN_CONSTANTS','$document'];
 	
 	angular.module('amoeba.home').controller("homeController",homeController);
 	
