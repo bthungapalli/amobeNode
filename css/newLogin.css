@@ -170,7 +170,7 @@
 .meetOurTeamContent{
     padding-left: 50px;
     padding-bottom: 65px;
-    padding-right: 175px;
+    padding-right: 140px;
 }
 
 .meetOurImage{
@@ -197,13 +197,15 @@
 	position:relative;
 	margin-right: 20px;
     margin-left: 20px;
-        margin-bottom: 30px;
+        margin-bottom: 45px;
         padding-top: 20px;
         left: 6%;
-            height: 225px;
+            height: 265px;
     text-align: center;
     border-radius: 5px;
     border: 2px solid #dfdfdf;
+    padding-right: 30px;
+    padding-left: 30px;
 }
 
 .faq-block{
@@ -215,21 +217,23 @@
         left: 6%;
         text-align: center;
         border-radius: 5px;
+        padding-right: 30px;
+    padding-left: 30px;
 }
 
 .faq-icon{
 	background-color:#9cc026;
     border-radius: 50%;
-    height: 4em;
-    width: 4em;
+    height: 6em;
+    width: 6em;
     margin-right: auto;
     margin-left: auto;
     color: white;
-    margin-top: -71px;
+    margin-top: -88px;
 }
 
-.faq-icon>h3{
-	line-height: 2.3em;
+.faq-icon>h2{
+	line-height: 2.7em;
 }
 .userType>p{
 	color:rgba(29, 27, 27, 0.65);
