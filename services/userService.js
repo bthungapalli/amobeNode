@@ -47,7 +47,7 @@ return{
 			 }else{
 				 var conditions = { "_id":user._id };
 				 var update = { $set: {"mobileNumber":user.mobileNumber,"address":user.address,"firstName": user.firstName,"lastName": user.lastName,
-					             "anonymous":user.anonymous,"city":user.city,"state":user.state,"zipcode":user.zipcode,
+					             "anonymous":user.anonymous,"city":user.city,"state":user.state,"zipcode":user.zipcode,"category":user.category,
 					             "age":user.age,"cases":user.cases,"updated_at":new Date()}};
 				 this.update(user,conditions,update,callbackForCreateOrUpdateUser);
 			 }

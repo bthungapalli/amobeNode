@@ -41,8 +41,7 @@
 	<label>Summary: </label>
 	<p>{{problem.summary}}</p>
 	<label>Description: </label>
-	<p>{{problem.description}}</p>
-	
+	<p ng-bind-html="problem.description | toTrustHtml"></p>
 	
 	<select ng-model="newConsultant">
 	<option>Select Consultant</option>
