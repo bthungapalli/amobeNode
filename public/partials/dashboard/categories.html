@@ -24,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr  ng-repeat="subcategory in category.subcategories">
+      <tr  ng-repeat="subcategory in category.subcategories track by  $index">
         <td>{{subcategory}} </td>
          <td><button class="btn btn-sm btn-danger" ng-click="removeSubcategory($index);"><span class="glyphicon glyphicon-remove"></span></button></td>
       </tr>
@@ -75,7 +75,7 @@
     <tbody>
       <tr  dir-paginate="category in categories |filter:search|itemsPerPage:itemsPerPage">
         <td>{{category.categoryName}} </td>
-        <td><span ng-repeat="subcategory in category.subcategories"> {{category.subcategories.length==$index+1?subcategory:subcategory+','}}</span> </td>
+        <td><span ng-repeat="subcategory in category.subcategories track by  $index"> {{category.subcategories.length==$index+1?subcategory:subcategory+','}}</span> </td>
         <td><button class="btn btn-sm btn-primary" ng-click="editCategory(category,$index);"><span class="glyphicon glyphicon-pencil"></span></button></td>
       </tr>
     </tbody>
