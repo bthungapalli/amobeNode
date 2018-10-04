@@ -12,14 +12,13 @@
     "grunt": "^1.0.1",
     "angular": "1.5.8",
     "angular-route": "1.5.8",
-    "bootstrap": "3.3.7",
+    "bootstrap": "^3.3.7",
     "angular-ui-router": "0.3.2",
     "body-parser": "^1.17.2",
-    "bootstrap": "^3.3.7",
     "client-sessions": "^0.8.0",
     "cookie-parser": "^1.4.3",
     "cookies": "^0.7.0",
-     "ejs": "^2.5.6",
+    "ejs": "^2.5.6",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
     "mongoose": "^4.10.8",
@@ -29,13 +28,13 @@
     "nodemailer": "^4.0.1",
     "cryptr": "^2.0.0",
     "swig-email-templates": "^4.0.0",
-     "angular-utils-pagination": "^0.10.0"
+    "angular-utils-pagination": "^0.10.0"
   },
   "devDependencies": {
     "eslint-html-reporter": "^0.5.2",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-eslint": "^19.0.0",
     "load-grunt-tasks": "^3.5.0",
-    "grunt-contrib-watch":"^1.0.0"
+    "grunt-contrib-watch": "^1.0.0"
   }
 }

@@ -16,7 +16,7 @@ router.post('/',function (req,res,next){
         		res.send("error");
 			    req.session.user = createdUser;
 						
-			    var subject =  nconf.get("mail").subject+" Register Confirmation for Amoeba";
+			    var subject =  nconf.get("mail").subject+" Register Confirmation for VetConnect";
 				var template = "registerConfirmation.html";
 
 				var context =  {

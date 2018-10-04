@@ -12,25 +12,28 @@
    },
    "mongoDbConnection":{
 	   "host":"localhost",
-	   "Db":"amoeba"
+	   "port":27111,
+	    "Db":"vetconnect"
    },
    "mail":{
 	  "recallSupport":"apatha@osius.com",
-		"subject":"[Amoeba] ",
-		"appURL" : "http://osiwizz.osius.com",
-		"appName":"Amoeba"
+		"subject":"[VETCONNECT] ",
+		"appURL" : "http://ec2-34-220-147-8.us-west-2.compute.amazonaws.com:3000/#/",
+		"appName":"VETCONNECT"
    },
-   "smtpConfig":{
-	   "host":"smtp.gmail.com",
-	   "port":465,
-	   "authUser":"",
-       "authPassword":""
-   },
-   "context":{
-	   	"path":"http://ec2-52-25-181-47.us-west-2.compute.amazonaws.com/#/"
+
+	 "smtpConfig":{
+    "host":"outlook.office365.com",
+    "port":587,
+    "authUser":"noreply@recallalarms.com",
+    "authPassword":"Firstlsi@05"
+  },
+
+	"context":{
+	   	"path":"http://ec2-34-220-147-8.us-west-2.compute.amazonaws.com:3000/#/"
   },
    "amoeba":{
-	   "filesPath":"/Users/apatha/Desktop/uploads/",
+	   "filesPath":"/apps/uploads/",
 	   "profilePath":"./profiles/"
    }
 
